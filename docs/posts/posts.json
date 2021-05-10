@@ -32,5 +32,22 @@
     "preview": {},
     "last_modified": "2021-05-10T14:52:56+08:00",
     "input_file": {}
+  },
+  {
+    "path": "posts/2021-05-10-project-background/",
+    "title": "Project Background",
+    "description": "Why",
+    "author": [
+      {
+        "name": "Hui-Chia HungWen",
+        "url": "https://hhungwen.github.io/SP_hhungwen.github.io/"
+      }
+    ],
+    "date": "2021-05-10",
+    "categories": [],
+    "contents": "\nProject Proposal Background\nTaiwan’s house prices continue to rise since many years ago, especially in the capital city - Taipei. Taipei is a city where has more job opportunities than other cities in Taiwan. Buying a home remains unaffordable for most young Taiwanese. An average household in Taipei needs to pay two-thirds of its income for a mortgage loan. Most of the young adult who works in Taipei would buy/rent a house in neighbor cities of Taipei, and commute by car/bus/ train for 30 min to 1 hour every workday. It causes the house price in neighboring cities to continually increase.\nKeelung, the city where I currently live, is one of the neighboring cities of Taipei but also the farthest one compares to other neighboring cities. I would like to analyze the house price changes in Keelung during these five years.\nGoals\nHouse price analysis.\nOverall Price increasing?\nCounty Average house price differences, and why?\nPresold rate of new constrction projects\n\n\n\n",
+    "preview": {},
+    "last_modified": "2021-05-10T15:24:04+08:00",
+    "input_file": "project-background.utf8.md"
   }
 ]
