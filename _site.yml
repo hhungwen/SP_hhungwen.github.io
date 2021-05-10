@@ -3,6 +3,7 @@ title: "Senior Project Blog"
 description: |
   Senior Project Blog
 output_dir: "docs"
+base_url: https://hhungwen.github.io/SP_hhungwen.github.io/
 navbar:
   right:
     - text: "Home"

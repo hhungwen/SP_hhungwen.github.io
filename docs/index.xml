@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/" version="2.0">
+  <channel>
+    <title>Senior Project Blog</title>
+    <link>https://hhungwen.github.io/SP_hhungwen.github.io/</link>
+    <atom:link href="https://hhungwen.github.io/SP_hhungwen.github.io/index.xml" rel="self" type="application/rss+xml"/>
+    <description>Senior Project Blog
+</description>
+    <generator>Distill</generator>
+    <lastBuildDate>Mon, 10 May 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>First try</title>
+      <dc:creator>Hui-Chia HungWen</dc:creator>
+      <link>https://hhungwen.github.io/SP_hhungwen.github.io/posts/2021-05-10-first-try</link>
+      <description>A short description of the post.</description>
+      <guid>https://hhungwen.github.io/SP_hhungwen.github.io/posts/2021-05-10-first-try</guid>
+      <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Welcome to Senior Project Blog</title>
+      <dc:creator>Nora Jones</dc:creator>
+      <link>https://hhungwen.github.io/SP_hhungwen.github.io/posts/welcome</link>
+      <description>Welcome to our new blog, Senior Project Blog. We hope you enjoy 
+reading what we have to say!</description>
+      <guid>https://hhungwen.github.io/SP_hhungwen.github.io/posts/welcome</guid>
+      <pubDate>Mon, 10 May 2021 00:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
