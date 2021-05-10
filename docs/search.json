@@ -1,0 +1,12 @@
+{
+  "articles": [
+    {
+      "path": "index.html",
+      "title": "Senior Project Blog",
+      "author": [],
+      "contents": "\n\n\n\n",
+      "last_modified": "2021-05-10T14:57:05+08:00"
+    }
+  ],
+  "collections": ["posts/posts.json"]
+}
