@@ -1,0 +1,31 @@
+---
+title: "Dealing data in different language"
+description: |
+  A short description of the post.
+author:
+  - name: Hui-Chia HungWen
+    url: https://hhungwen.github.io/SP_hhungwen.github.io/
+date: 05-15-2021
+output:
+  distill::distill_article:
+    folder_hide: true
+    self_contained: false
+    themes: readthedown
+---
+
+While working on my senior project, the first challenge I faces was translating the data to English. 
+```
+library(readxl)
+library(pander)
+library(tidyverse)
+library(DT)
+library(rmdformats)
+Data <- read_excel("~/Desktop/SP_hhungwen/Data/keelung2017-2020-2 .xlsx")
+
+Data%>%
+  DT::datatable(class = 'cell-border stripe)%>%
+  DT::formatStyle(columns = colnames(.),fontSize = '50%')
+```
+
+    
+

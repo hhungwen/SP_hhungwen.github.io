@@ -1,5 +1,22 @@
 [
   {
+    "path": "posts/2021-05-15-dealing-data-in-different-language/",
+    "title": "Dealing data in different language",
+    "description": "A short description of the post.",
+    "author": [
+      {
+        "name": "Hui-Chia HungWen",
+        "url": "https://hhungwen.github.io/SP_hhungwen.github.io/"
+      }
+    ],
+    "date": "2021-05-15",
+    "categories": [],
+    "contents": "\nWhile working on my senior project, the first challenge I faces was translating the data to English.\nlibrary(readxl)\nlibrary(pander)\nlibrary(tidyverse)\nlibrary(DT)\nlibrary(rmdformats)\nData <- read_excel(\"~/Desktop/SP_hhungwen/Data/keelung2017-2020-2 .xlsx\")\n\nData%>%\n  DT::datatable(class = 'cell-border stripe)%>%\n  DT::formatStyle(columns = colnames(.),fontSize = '50%')\n\n\n\n",
+    "preview": {},
+    "last_modified": "2021-05-15T16:39:17+08:00",
+    "input_file": "dealing-data-in-different-language.utf8.md"
+  },
+  {
     "path": "posts/2021-05-10-first-try/",
     "title": "First try",
     "description": "A short description of the post.",
