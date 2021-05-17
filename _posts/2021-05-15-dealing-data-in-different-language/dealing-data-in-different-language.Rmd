@@ -23,9 +23,22 @@ library(rmdformats)
 Data <- read_excel("~/Desktop/SP_hhungwen/Data/keelung2017-2020-2 .xlsx")
 
 Data%>%
-  DT::datatable(class = 'cell-border stripe)%>%
-  DT::formatStyle(columns = colnames(.),fontSize = '50%')
+  DT::datatable(class = 'cell-border stripe,options = list(
+  pageLength = 5, autoWidth = TRUE
+))
+
+```{r}
+library(readxl)
+library(pander)
+library(tidyverse)
+library(DT)
+library(rmdformats)
+
+Data <- read_excel("~/Desktop/SP_hhungwen/Data/keelung2017-2020-2 .xlsx")
+
+datatable(Data, options = list(pageLength = 5, autoWidth = TRUE))
 ```
+
 
     
 
