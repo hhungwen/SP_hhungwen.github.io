@@ -1,0 +1,288 @@
+---
+title: "Subset the Model"
+description: |
+  Subset the model by Stepwise in R.
+author:
+  - name: Hui-Chia HungWen
+    url: https://hhungwen.github.io/SP_hhungwen.github.io/
+date: 06-22-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, message = FALSE, include = FALSE}
+
+library(dplyr)
+library(readr)
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(DT)
+
+Data <- read_csv("~/Desktop/SP_hhungwen/Data/KeelungENG.csv")
+DataS <- read_csv("~/Desktop/SP_hhungwen/Data/DataS.csv")
+DataPS <- read_csv("~/Desktop/SP_hhungwen/Data/DataPS.csv")
+Presold <- read_csv("~/Desktop/SP_hhungwen/Data/Presold.csv")
+
+str(DataS)
+DataS <- na.omit(DataS)
+ModelData <- subset(DataS, select = c(-Address, -Community_Management, -Unit_Partition,-Trade_Year, -interest_m,-Price_Total, -Build_Year, -County))
+
+```
+# 為什麼需要子集法Subsets selection?
+
+線性迴歸有許多變形(variants)，主要是因為實務上的情況往往不會跟理論假設一樣，因此若單純使用線性迴歸，可能會產生許多問題。例如常常都會遇到overfitting的問題，這時候就必須要試圖降低「模型的複雜度」。  
+
+
+# Stepwise 是什麼？
+
+Stepwise 「逐步回歸法」  
+
+逐步回歸法的核心概念很簡單，就是試著找出比較簡單的模型，就能達成跟原模型差不多的表現與效果。  
+
+舉個例子，假設現在資料中有 x1 ~ x5   五個變數，那線性迴歸就能寫成：  
+
+y = a + b1 * x1 + b2 * x2 + b3 * x3 + b4 * x4 + b5 * x5  
+
+Stepwise Regression只需要建構「一個 模型」，然後在上面直接新增(或減少)變數。  
+
+一般有兩種方法：向前選取法(Forward)跟向後選取法(Backward)：
+
+- Forward Stepwise：在一個空的迴歸中，逐一添加變數，直到任何一個變數的額外貢獻度(AIC值)已經沒有統計意義了，那就停止。(p >> n 可以使用)
+
+- Backward Stepwise：在一個完整的迴歸中，逐一移除變數，直到移除任何一個變數時，模型都會損失過多的解釋力，那就停止。(只有 n > p 才可以使用)
+
+- Both：以上兩種方法的結合， 同時考量新增/移除變數對模型的影響，缺點是運算效率會比較慢。
+
+要注意的是，Forward 在新增變數後就不會再取出，並以現狀為基準，來衡量後續添加變數的貢獻，因此有時候會因為添加順序而產生問題(例如，一開始先選 x1，那接下來就會選 x2；可是如果先選 x2，卻不保證接下來一定會選 x1)。Backward 跟 Both 也同理。
+
+# R code for stepwise Regression
+在R裡面，要建立 Stepwise Regression，會使用step()的函式。(已在R的內建package stats中)  
+
+以下會用我專題報告的房屋交易紀錄資料要來示範Stepwise Regression.  
+在此房價交易紀錄中, *Price_Meter* (坪)為依變數Dependent variable, 代表每筆房屋交易紀錄每坪的平均價格.  
+
+先將資料分成 Train (0.8)＆ Test (0.2)  
+```{r}
+
+set.seed(13)
+train.index<- sample(x=1:nrow(ModelData), size = ceiling(0.8*nrow(ModelData)))
+train = ModelData[train.index,]
+test = ModelData[-train.index,]
+
+```
+
+## Forward Stepwise Regression
+
+使用Forward Stepwise Regression ，步驟有兩個： 
+
+- 建立空的線性迴歸(只有截距項)   
+
+- 用step()，一個一個把變數丟進去，看哪個變數貢獻最多！(衡量AIC)  
+
+
+
+
+
+
+
+- Step 1   
+
+建立上界，也就是完整的線性迴歸  
+```{r}
+null = lm(Price_Meter ~ 1, data = train)  
+full = lm(Price_Meter ~ ., data = train) 
+
+```
+
+
+
+- Step 2  
+
+使用step()，一個一個把變數丟進去  
+從空模型開始，一個一個丟變數，  
+最大不會超過完整的線性迴歸  
+(一定要加上界 upper=full，不可以不加)   
+
+```{r}
+forward.lm = step(null, 
+                  scope=list(lower=null, upper=full),
+                  direction="forward")
+
+
+```
+訓練過程中,我們可以觀察到是譖麼每一次增加變數到模型內的.  
+這裡是用AIC指標來衡量每個變數的貢獻度.（ＡＩＣ值越小越好.）  
+
+
+- 空的模型的AIC = 4803.95  
+從variables中挑選 AIC 值最小的 Note  
+
+- ~ Note 之後 AIC = 4078.6  
+挑選 AIC 值最小的 Rank_Taipei  
+
+- ~ Note+Rank_Taipei 之後 AIC = 3972.13  
+挑選 AIC 值最小的 Build_Type  
+
+依此類推  
+
+.  
+.  
+.  
+
+- ~ Note+Rank_Taipei+Build_Type 之後 AIC = 3930.2
+- ~ Note+Rank_Taipei+Build_Type+Rank_PopDensity AIC = 3885.92  
+- ~ Note+Rank_Taipei+Build_Type+Rank_PopDensity+Build_Date AIC = 3877.21  
+
+.  
+.  
+.  
+直到發現如果新增邊變數時,AIC上升,就停止了.  
+最終的Model如下：  
+
+
+-  ~ Note+Rank_Taipei+Build_Type+Rank_PopDensity+Build_Date+Buils_Material+ Unit_Room+Total_Area+Rank_CityCenter+Total_Floor AIC = 3833.39  
+
+```{r}
+summary(forward.lm)
+```
+
+最終的模型summary  
+Adj R-squared = 0.4153  
+
+Forward的概念是用挑選的, 所以保留於模型中的變數都是被挑選出來的重要變數.  
+也可以再更深入的去看每一個變數的p-value再去決定自己模型的使用變數.  
+
+
+
+
+## Backward Stepwise Regression 
+
+使用Backward Stepwise Regression的步驟也是兩個,只是從完整的模型中一個一個把變數移除,看看哪個變數移除後的AIC下降最多!  
+
+
+
+- Step 1  
+先建立一個完整的線性迴歸  
+
+
+```{r}
+set.seed(21)
+Btrain.index<- sample(x=1:nrow(ModelData), size = ceiling(0.8*nrow(ModelData)))
+Btrain = ModelData[Btrain.index,]
+Btest = ModelData[-Btrain.index,]
+Bfull = lm(Price_Meter ~ ., data = Btrain)  
+```
+
+- Step 2  
+
+用step()，一個一個把變數移除，看移除哪個變數後 AIC 下降最多  
+這裡可以加下界(lower=null)，也可以不加   
+
+```{r}
+backward.lm = step(Bfull, 
+                   scope = list(upper=Bfull), 
+                   direction="backward")  
+
+
+```
+- 模型使用所有變數時, AIC = 3946.97  
+
+在結果中可以看見每一個變數對AIC的改變, 再去挑選要移除的變數.  
+
+可以看見Unit_Living, Rank_Train, interest_rate, Land_Area, Unit_Floor, Build_Age, Trade_Date, Unit_Bath等變數的AIC變化都在1以內, 這些變數很明顯的對Model並無太大的變化,因此可以直接移除掉.  
+
+.  
+.  
+.  
+
+依此類推  
+
+最後的模型如下:  
+
+- Price_Meter ~ Total_Floor + Build_Type + Build_Material + Build_Date + 
+    Total_Area + Unit_Room + Note + Rank_CityCenter + Rank_Market + 
+    Rank_Taipei + Rank_PopDensity  
+    
+- AIC = 3934.33  
+
+```{r}
+summary(backward.lm)
+```
+
+最終的模型結果, Adj R-squared = 0.6546  
+由於Backward是用"剔除"的方式, 所以保留於模型的這些變數算是被留下來的重要變數.也可更進一步的留意每個變數的p-Value並推論這些變數是否對模型有切確的影響.  
+
+```{r}
+# 此案例中，剛好跟 forward 結果一樣
+step(null, scope = list(upper=full), direction="both")
+# 此案例中，剛好跟 backward 結果一樣
+step(full, scope = list(upper=full), direction="both")  
+```
+
+ 
+
+# 預測
+
+在建構模型的過程中,我們已達成變數挑選的目的,從變數的p-value及係數做推論,而建構完模型之後往往要面對的議題就是預測.
+在最一開始我們將資料分為test和train就是為了要預測模型的準確度.  
+
+由於用step()回傳的模型型態和lm()是一樣的,所以可以直接用線性回歸的預測方法.  
+
+
+self-defined 的 R-squared 函式  
+
+```{r}
+R_squared <- function(actual, predict){
+  mean_of_obs <- rep(mean(actual), length(actual))
+    SS_tot <- sum((actual - mean_of_obs)^2)
+  SS_reg <- sum((predict - mean_of_obs)^2)
+  #SS_res <- sum((actual - predict)^2)
+  R_squared <- SS_reg/SS_tot   #1 - (SS_res/SS_tot)
+  R_squared
+}
+```
+
+直接用predict()來預測  
+並衡量lm,forward,backward的預測結果.
+```{r}
+forward.test1 = predict(forward.lm, test)
+backward.test1 = predict(backward.lm, Btest)
+lm.test = predict(full,test)
+
+
+c(R_squared(test$Price_Meter, forward.test1),
+  R_squared(Btest$Price_Meter, backward.test1), 
+  R_squared(test$Price_Meter, lm.test))
+
+
+```
+  
+可以看見, Backward無論在train 或 test的效果都比較好.  
+代表在此房屋交易資料中, 對於每坪房價的預測,利用Backward的方式保留重要變數比挑選變數更能呈現出資料的線性型態.  
+
+
+# 結果討論  
+
+以上是將Data分成Train & Test來進行, 主要是”預測“的考量. 若今天是要探討"變數的重要性" 或 "解釋x和y的關係", 還是會傾向將全部變數放進線性回歸來建立模型.  
+
+而關於p-value，統計中 0.05 ~ 0.1稱之為marginal significance，雖然本文是拿 0.05 當作一個基準，不過事實上有某些學者認為這樣的變數還是具有一定的顯著性，因此在變數挑選的過程中，還是要根據實務狀況來訂下一個基準。
+
+在判斷「重要變數」時，往往也得跟實務上的「領域知識」做結合。
+
+使用 Stepwise Regression 挑選出來的重要變數，其實只是在「統計上」具有意義，並不代表「實際上」是有意義的，只能說有這個可能性而已。
+
+所謂的資料，其實都只是「樣本」，並非「母體」。
+
+因此，當今天判斷出某個變數並不顯著(重要)時，有可能只是因為我們所蒐集的資料不足，所以無法在統計上顯現出這些變數的重要性。
+
+又或者，資料本身並不適合用線性模型來模擬，反而用非線性的模型比較好(e.g., 決策樹、SVM)。
+
+有很多因素都會影響最後資料分析提供的結果，因此需要多方比較，並佐以實務面上的知識，才能做出最後定論。
+
+
+
+
+
+

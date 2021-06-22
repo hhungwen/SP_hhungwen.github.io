@@ -1,0 +1,2927 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+  <meta name="generator" content="distill" />
+
+  <style type="text/css">
+  /* Hide doc at startup (prevent jankiness while JS renders/transforms) */
+  body {
+    visibility: hidden;
+  }
+  </style>
+
+ <!--radix_placeholder_import_source-->
+ <!--/radix_placeholder_import_source-->
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ad0000; } /* Alert */
+code span.an { color: #5e5e5e; } /* Annotation */
+code span.at { color: #20794d; } /* Attribute */
+code span.bn { color: #ad0000; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007ba5; } /* ControlFlow */
+code span.ch { color: #20794d; } /* Char */
+code span.cn { color: #8f5902; } /* Constant */
+code span.co { color: #5e5e5e; } /* Comment */
+code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+code span.dt { color: #ad0000; } /* DataType */
+code span.dv { color: #ad0000; } /* DecVal */
+code span.er { color: #ad0000; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #ad0000; } /* Float */
+code span.fu { color: #4758ab; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #5e5e5e; } /* Information */
+code span.kw { color: #007ba5; } /* Keyword */
+code span.op { color: #5e5e5e; } /* Operator */
+code span.ot { color: #007ba5; } /* Other */
+code span.pp { color: #ad0000; } /* Preprocessor */
+code span.sc { color: #20794d; } /* SpecialChar */
+code span.ss { color: #20794d; } /* SpecialString */
+code span.st { color: #20794d; } /* String */
+code span.va { color: #111111; } /* Variable */
+code span.vs { color: #20794d; } /* VerbatimString */
+code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+</style>
+
+  <!--radix_placeholder_meta_tags-->
+  <title>Subset the Model</title>
+
+  <meta property="description" itemprop="description" content="Subset the model by Stepwise in R."/>
+
+
+  <!--  https://schema.org/Article -->
+  <meta property="article:published" itemprop="datePublished" content="2021-06-22"/>
+  <meta property="article:created" itemprop="dateCreated" content="2021-06-22"/>
+  <meta name="article:author" content="Hui-Chia HungWen"/>
+
+  <!--  https://developers.facebook.com/docs/sharing/webmasters#markup -->
+  <meta property="og:title" content="Subset the Model"/>
+  <meta property="og:type" content="article"/>
+  <meta property="og:description" content="Subset the model by Stepwise in R."/>
+  <meta property="og:locale" content="en_US"/>
+
+  <!--  https://dev.twitter.com/cards/types/summary -->
+  <meta property="twitter:card" content="summary"/>
+  <meta property="twitter:title" content="Subset the Model"/>
+  <meta property="twitter:description" content="Subset the model by Stepwise in R."/>
+
+  <!--/radix_placeholder_meta_tags-->
+  <!--radix_placeholder_rmarkdown_metadata-->
+
+  <script type="text/json" id="radix-rmarkdown-metadata">
+  {"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["title","description","author","date","output"]}},"value":[{"type":"character","attributes":{},"value":["Subset the Model"]},{"type":"character","attributes":{},"value":["Subset the model by Stepwise in R.\n"]},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","url"]}},"value":[{"type":"character","attributes":{},"value":["Hui-Chia HungWen"]},{"type":"character","attributes":{},"value":["https://hhungwen.github.io/SP_hhungwen.github.io/"]}]}]},{"type":"character","attributes":{},"value":["06-22-2021"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["distill::distill_article"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["self_contained"]}},"value":[{"type":"logical","attributes":{},"value":[false]}]}]}]}
+  </script>
+  <!--/radix_placeholder_rmarkdown_metadata-->
+  
+  <script type="text/json" id="radix-resource-manifest">
+  {"type":"character","attributes":{},"value":["subset-the-model_files/anchor-4.2.2/anchor.min.js","subset-the-model_files/bowser-1.9.3/bowser.min.js","subset-the-model_files/distill-2.2.21/template.v2.js","subset-the-model_files/header-attrs-2.6/header-attrs.js","subset-the-model_files/jquery-1.11.3/jquery.min.js","subset-the-model_files/popper-2.6.0/popper.min.js","subset-the-model_files/tippy-6.2.7/tippy-bundle.umd.min.js","subset-the-model_files/tippy-6.2.7/tippy-light-border.css","subset-the-model_files/tippy-6.2.7/tippy.css","subset-the-model_files/tippy-6.2.7/tippy.umd.min.js","subset-the-model_files/webcomponents-2.0.0/webcomponents.js"]}
+  </script>
+  <!--radix_placeholder_navigation_in_header-->
+  <!--/radix_placeholder_navigation_in_header-->
+  <!--radix_placeholder_distill-->
+
+  <style type="text/css">
+
+  body {
+    background-color: white;
+  }
+
+  .pandoc-table {
+    width: 100%;
+  }
+
+  .pandoc-table>caption {
+    margin-bottom: 10px;
+  }
+
+  .pandoc-table th:not([align]) {
+    text-align: left;
+  }
+
+  .pagedtable-footer {
+    font-size: 15px;
+  }
+
+  d-byline .byline {
+    grid-template-columns: 2fr 2fr;
+  }
+
+  d-byline .byline h3 {
+    margin-block-start: 1.5em;
+  }
+
+  d-byline .byline .authors-affiliations h3 {
+    margin-block-start: 0.5em;
+  }
+
+  .authors-affiliations .orcid-id {
+    width: 16px;
+    height:16px;
+    margin-left: 4px;
+    margin-right: 4px;
+    vertical-align: middle;
+    padding-bottom: 2px;
+  }
+
+  d-title .dt-tags {
+    margin-top: 1em;
+    grid-column: text;
+  }
+
+  .dt-tags .dt-tag {
+    text-decoration: none;
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0em 0.4em;
+    margin-right: 0.5em;
+    margin-bottom: 0.4em;
+    font-size: 70%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  d-article table.gt_table td,
+  d-article table.gt_table th {
+    border-bottom: none;
+  }
+
+  .html-widget {
+    margin-bottom: 2.0em;
+  }
+
+  .l-screen-inset {
+    padding-right: 16px;
+  }
+
+  .l-screen .caption {
+    margin-left: 10px;
+  }
+
+  .shaded {
+    background: rgb(247, 247, 247);
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .html-widget {
+    margin-bottom: 0;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .shaded .shaded-content {
+    background: white;
+  }
+
+  .text-output {
+    margin-top: 0;
+    line-height: 1.5em;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  d-article {
+    padding-top: 2.5rem;
+    padding-bottom: 30px;
+  }
+
+  d-appendix {
+    padding-top: 30px;
+  }
+
+  d-article>p>img {
+    width: 100%;
+  }
+
+  d-article h2 {
+    margin: 1rem 0 1.5rem 0;
+  }
+
+  d-article h3 {
+    margin-top: 1.5rem;
+  }
+
+  d-article iframe {
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 2.0em;
+    width: 100%;
+  }
+
+  /* Tweak code blocks */
+
+  d-article div.sourceCode code,
+  d-article pre code {
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  }
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: auto;
+  }
+
+  d-article div.sourceCode {
+    background-color: white;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 10px;
+    font-size: 12px;
+    border-left: 2px solid rgba(0,0,0,0.1);
+  }
+
+  d-article pre {
+    font-size: 12px;
+    color: black;
+    background: none;
+    margin-top: 0;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  d-article pre a {
+    border-bottom: none;
+  }
+
+  d-article pre a:hover {
+    border-bottom: none;
+    text-decoration: underline;
+  }
+
+  d-article details {
+    grid-column: text;
+    margin-bottom: 0.8em;
+  }
+
+  @media(min-width: 768px) {
+
+  d-article pre,
+  d-article div.sourceCode,
+  d-article div.sourceCode pre {
+    overflow: visible !important;
+  }
+
+  d-article div.sourceCode pre {
+    padding-left: 18px;
+    font-size: 14px;
+  }
+
+  d-article pre {
+    font-size: 14px;
+  }
+
+  }
+
+  figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  /* CSS for d-contents */
+
+  .d-contents {
+    grid-column: text;
+    color: rgba(0,0,0,0.8);
+    font-size: 0.9em;
+    padding-bottom: 1em;
+    margin-bottom: 1em;
+    padding-bottom: 0.5em;
+    margin-bottom: 1em;
+    padding-left: 0.25em;
+    justify-self: start;
+  }
+
+  @media(min-width: 1000px) {
+    .d-contents.d-contents-float {
+      height: 0;
+      grid-column-start: 1;
+      grid-column-end: 4;
+      justify-self: center;
+      padding-right: 3em;
+      padding-left: 2em;
+    }
+  }
+
+  .d-contents nav h3 {
+    font-size: 18px;
+    margin-top: 0;
+    margin-bottom: 1em;
+  }
+
+  .d-contents li {
+    list-style-type: none
+  }
+
+  .d-contents nav > ul {
+    padding-left: 0;
+  }
+
+  .d-contents ul {
+    padding-left: 1em
+  }
+
+  .d-contents nav ul li {
+    margin-top: 0.6em;
+    margin-bottom: 0.2em;
+  }
+
+  .d-contents nav a {
+    font-size: 13px;
+    border-bottom: none;
+    text-decoration: none
+    color: rgba(0, 0, 0, 0.8);
+  }
+
+  .d-contents nav a:hover {
+    text-decoration: underline solid rgba(0, 0, 0, 0.6)
+  }
+
+  .d-contents nav > ul > li > a {
+    font-weight: 600;
+  }
+
+  .d-contents nav > ul > li > ul {
+    font-weight: inherit;
+  }
+
+  .d-contents nav > ul > li > ul > li {
+    margin-top: 0.2em;
+  }
+
+
+  .d-contents nav ul {
+    margin-top: 0;
+    margin-bottom: 0.25em;
+  }
+
+  .d-article-with-toc h2:nth-child(2) {
+    margin-top: 0;
+  }
+
+
+  /* Figure */
+
+  .figure {
+    position: relative;
+    margin-bottom: 2.5em;
+    margin-top: 1.5em;
+  }
+
+  .figure img {
+    width: 100%;
+  }
+
+  .figure .caption {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 12px;
+    line-height: 1.5em;
+  }
+
+  .figure img.external {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+    padding: 18px;
+    box-sizing: border-box;
+  }
+
+  .figure .caption a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .figure .caption b,
+  .figure .caption strong, {
+    font-weight: 600;
+    color: rgba(0, 0, 0, 1.0);
+  }
+
+  /* Citations */
+
+  d-article .citation {
+    color: inherit;
+    cursor: inherit;
+  }
+
+  div.hanging-indent{
+    margin-left: 1em; text-indent: -1em;
+  }
+
+  /* Citation hover box */
+
+  .tippy-box[data-theme~=light-border] {
+    background-color: rgba(250, 250, 250, 0.95);
+  }
+
+  .tippy-content > p {
+    margin-bottom: 0;
+    padding: 2px;
+  }
+
+
+  /* Tweak 1000px media break to show more text */
+
+  @media(min-width: 1000px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 80px [middle-start] 50px [text-start kicker-end] 65px 65px 65px 65px 65px 65px 65px 65px [text-end gutter-start] 65px [middle-end] 65px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 16px;
+    }
+
+    .grid {
+      grid-column-gap: 16px;
+    }
+
+    d-article {
+      font-size: 1.06rem;
+      line-height: 1.7em;
+    }
+    figure .caption, .figure .caption, figure figcaption {
+      font-size: 13px;
+    }
+  }
+
+  @media(min-width: 1180px) {
+    .base-grid,
+    distill-header,
+    d-title,
+    d-abstract,
+    d-article,
+    d-appendix,
+    distill-appendix,
+    d-byline,
+    d-footnote-list,
+    d-citation-list,
+    distill-footer {
+      grid-template-columns: [screen-start] 1fr [page-start kicker-start] 60px [middle-start] 60px [text-start kicker-end] 60px 60px 60px 60px 60px 60px 60px 60px [text-end gutter-start] 60px [middle-end] 60px [page-end gutter-end] 1fr [screen-end];
+      grid-column-gap: 32px;
+    }
+
+    .grid {
+      grid-column-gap: 32px;
+    }
+  }
+
+
+  /* Get the citation styles for the appendix (not auto-injected on render since
+     we do our own rendering of the citation appendix) */
+
+  d-appendix .citation-appendix,
+  .d-appendix .citation-appendix {
+    font-size: 11px;
+    line-height: 15px;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding-left: 18px;
+    border: 1px solid rgba(0,0,0,0.1);
+    background: rgba(0, 0, 0, 0.02);
+    padding: 10px 18px;
+    border-radius: 3px;
+    color: rgba(150, 150, 150, 1);
+    overflow: hidden;
+    margin-top: -12px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+
+  /* Include appendix styles here so they can be overridden */
+
+  d-appendix {
+    contain: layout style;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-top: 60px;
+    margin-bottom: 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: rgba(0,0,0,0.5);
+    padding-top: 60px;
+    padding-bottom: 48px;
+  }
+
+  d-appendix h3 {
+    grid-column: page-start / text-start;
+    font-size: 15px;
+    font-weight: 500;
+    margin-top: 1em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.65);
+  }
+
+  d-appendix h3 + * {
+    margin-top: 1em;
+  }
+
+  d-appendix ol {
+    padding: 0 0 0 15px;
+  }
+
+  @media (min-width: 768px) {
+    d-appendix ol {
+      padding: 0 0 0 30px;
+      margin-left: -30px;
+    }
+  }
+
+  d-appendix li {
+    margin-bottom: 1em;
+  }
+
+  d-appendix a {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  d-appendix > * {
+    grid-column: text;
+  }
+
+  d-appendix > d-footnote-list,
+  d-appendix > d-citation-list,
+  d-appendix > distill-appendix {
+    grid-column: screen;
+  }
+
+  /* Include footnote styles here so they can be overridden */
+
+  d-footnote-list {
+    contain: layout style;
+  }
+
+  d-footnote-list > * {
+    grid-column: text;
+  }
+
+  d-footnote-list a.footnote-backlink {
+    color: rgba(0,0,0,0.3);
+    padding-left: 0.5em;
+  }
+
+
+
+  /* Anchor.js */
+
+  .anchorjs-link {
+    /*transition: all .25s linear; */
+    text-decoration: none;
+    border-bottom: none;
+  }
+  *:hover > .anchorjs-link {
+    margin-left: -1.125em !important;
+    text-decoration: none;
+    border-bottom: none;
+  }
+
+  /* Social footer */
+
+  .social_footer {
+    margin-top: 30px;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.67);
+  }
+
+  .disqus-comments {
+    margin-right: 30px;
+  }
+
+  .disqus-comment-count {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+
+  #disqus_thread {
+    margin-top: 30px;
+  }
+
+  .article-sharing a {
+    border-bottom: none;
+    margin-right: 8px;
+  }
+
+  .article-sharing a:hover {
+    border-bottom: none;
+  }
+
+  .sidebar-section.subscribe {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .subscribe p {
+    margin-bottom: 0.5em;
+  }
+
+
+  .article-footer .subscribe {
+    font-size: 15px;
+    margin-top: 45px;
+  }
+
+
+  .sidebar-section.custom {
+    font-size: 12px;
+    line-height: 1.6em;
+  }
+
+  .custom p {
+    margin-bottom: 0.5em;
+  }
+
+  /* Styles for listing layout (hide title) */
+  .layout-listing d-title, .layout-listing .d-title {
+    display: none;
+  }
+
+  /* Styles for posts lists (not auto-injected) */
+
+
+  .posts-with-sidebar {
+    padding-left: 45px;
+    padding-right: 45px;
+  }
+
+  .posts-list .description h2,
+  .posts-list .description p {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+  }
+
+  .posts-list .description h2 {
+    font-weight: 700;
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+
+  .posts-list h2.post-tag {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    padding-bottom: 12px;
+  }
+  .posts-list {
+    margin-top: 60px;
+    margin-bottom: 24px;
+  }
+
+  .posts-list .post-preview {
+    text-decoration: none;
+    overflow: hidden;
+    display: block;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 24px 0;
+  }
+
+  .post-preview-last {
+    border-bottom: none !important;
+  }
+
+  .posts-list .posts-list-caption {
+    grid-column: screen;
+    font-weight: 400;
+  }
+
+  .posts-list .post-preview h2 {
+    margin: 0 0 6px 0;
+    line-height: 1.2em;
+    font-style: normal;
+    font-size: 24px;
+  }
+
+  .posts-list .post-preview p {
+    margin: 0 0 12px 0;
+    line-height: 1.4em;
+    font-size: 16px;
+  }
+
+  .posts-list .post-preview .thumbnail {
+    box-sizing: border-box;
+    margin-bottom: 24px;
+    position: relative;
+    max-width: 500px;
+  }
+  .posts-list .post-preview img {
+    width: 100%;
+    display: block;
+  }
+
+  .posts-list .metadata {
+    font-size: 12px;
+    line-height: 1.4em;
+    margin-bottom: 18px;
+  }
+
+  .posts-list .metadata > * {
+    display: inline-block;
+  }
+
+  .posts-list .metadata .publishedDate {
+    margin-right: 2em;
+  }
+
+  .posts-list .metadata .dt-authors {
+    display: block;
+    margin-top: 0.3em;
+    margin-right: 2em;
+  }
+
+  .posts-list .dt-tags {
+    display: block;
+    line-height: 1em;
+  }
+
+  .posts-list .dt-tags .dt-tag {
+    display: inline-block;
+    color: rgba(0,0,0,0.6);
+    padding: 0.3em 0.4em;
+    margin-right: 0.2em;
+    margin-bottom: 0.4em;
+    font-size: 60%;
+    border: 1px solid rgba(0,0,0,0.2);
+    border-radius: 3px;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .posts-list img {
+    opacity: 1;
+  }
+
+  .posts-list img[data-src] {
+    opacity: 0;
+  }
+
+  .posts-more {
+    clear: both;
+  }
+
+
+  .posts-sidebar {
+    font-size: 16px;
+  }
+
+  .posts-sidebar h3 {
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 0.5em;
+    font-weight: 400;
+    text-transform: uppercase;
+  }
+
+  .sidebar-section {
+    margin-bottom: 30px;
+  }
+
+  .categories ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .categories li {
+    color: rgba(0, 0, 0, 0.8);
+    margin-bottom: 0;
+  }
+
+  .categories li>a {
+    border-bottom: none;
+  }
+
+  .categories li>a:hover {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .categories .active {
+    font-weight: 600;
+  }
+
+  .categories .category-count {
+    color: rgba(0, 0, 0, 0.4);
+  }
+
+
+  @media(min-width: 768px) {
+    .posts-list .post-preview h2 {
+      font-size: 26px;
+    }
+    .posts-list .post-preview .thumbnail {
+      float: right;
+      width: 30%;
+      margin-bottom: 0;
+    }
+    .posts-list .post-preview .description {
+      float: left;
+      width: 45%;
+    }
+    .posts-list .post-preview .metadata {
+      float: left;
+      width: 20%;
+      margin-top: 8px;
+    }
+    .posts-list .post-preview p {
+      margin: 0 0 12px 0;
+      line-height: 1.5em;
+      font-size: 16px;
+    }
+    .posts-with-sidebar .posts-list {
+      float: left;
+      width: 75%;
+    }
+    .posts-with-sidebar .posts-sidebar {
+      float: right;
+      width: 20%;
+      margin-top: 60px;
+      padding-top: 24px;
+      padding-bottom: 24px;
+    }
+  }
+
+
+  /* Improve display for browsers without grid (IE/Edge <= 15) */
+
+  .downlevel {
+    line-height: 1.6em;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", Arial, sans-serif;
+    margin: 0;
+  }
+
+  .downlevel .d-title {
+    padding-top: 6rem;
+    padding-bottom: 1.5rem;
+  }
+
+  .downlevel .d-title h1 {
+    font-size: 50px;
+    font-weight: 700;
+    line-height: 1.1em;
+    margin: 0 0 0.5rem;
+  }
+
+  .downlevel .d-title p {
+    font-weight: 300;
+    font-size: 1.2rem;
+    line-height: 1.55em;
+    margin-top: 0;
+  }
+
+  .downlevel .d-byline {
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    font-size: 0.8rem;
+    line-height: 1.8em;
+  }
+
+  .downlevel .section-separator {
+    border: none;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  .downlevel .d-article {
+    font-size: 1.06rem;
+    line-height: 1.7em;
+    padding-top: 1rem;
+    padding-bottom: 2rem;
+  }
+
+
+  .downlevel .d-appendix {
+    padding-left: 0;
+    padding-right: 0;
+    max-width: none;
+    font-size: 0.8em;
+    line-height: 1.7em;
+    margin-bottom: 0;
+    color: rgba(0,0,0,0.5);
+    padding-top: 40px;
+    padding-bottom: 48px;
+  }
+
+  .downlevel .footnotes ol {
+    padding-left: 13px;
+  }
+
+  .downlevel .base-grid,
+  .downlevel .distill-header,
+  .downlevel .d-title,
+  .downlevel .d-abstract,
+  .downlevel .d-article,
+  .downlevel .d-appendix,
+  .downlevel .distill-appendix,
+  .downlevel .d-byline,
+  .downlevel .d-footnote-list,
+  .downlevel .d-citation-list,
+  .downlevel .distill-footer,
+  .downlevel .appendix-bottom,
+  .downlevel .posts-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  @media(min-width: 768px) {
+    .downlevel .base-grid,
+    .downlevel .distill-header,
+    .downlevel .d-title,
+    .downlevel .d-abstract,
+    .downlevel .d-article,
+    .downlevel .d-appendix,
+    .downlevel .distill-appendix,
+    .downlevel .d-byline,
+    .downlevel .d-footnote-list,
+    .downlevel .d-citation-list,
+    .downlevel .distill-footer,
+    .downlevel .appendix-bottom,
+    .downlevel .posts-container {
+    padding-left: 150px;
+    padding-right: 150px;
+    max-width: 900px;
+  }
+  }
+
+  .downlevel pre code {
+    display: block;
+    border-left: 2px solid rgba(0, 0, 0, .1);
+    padding: 0 0 0 20px;
+    font-size: 14px;
+  }
+
+  .downlevel code, .downlevel pre {
+    color: black;
+    background: none;
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    line-height: 1.5;
+
+    -moz-tab-size: 4;
+    -o-tab-size: 4;
+    tab-size: 4;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+  }
+
+  .downlevel .posts-list .post-preview {
+    color: inherit;
+  }
+
+
+
+  </style>
+
+  <script type="application/javascript">
+
+  function is_downlevel_browser() {
+    if (bowser.isUnsupportedBrowser({ msie: "12", msedge: "16"},
+                                   window.navigator.userAgent)) {
+      return true;
+    } else {
+      return window.load_distill_framework === undefined;
+    }
+  }
+
+  // show body when load is complete
+  function on_load_complete() {
+
+    // add anchors
+    if (window.anchors) {
+      window.anchors.options.placement = 'left';
+      window.anchors.add('d-article > h2, d-article > h3, d-article > h4, d-article > h5');
+    }
+
+
+    // set body to visible
+    document.body.style.visibility = 'visible';
+
+    // force redraw for leaflet widgets
+    if (window.HTMLWidgets) {
+      var maps = window.HTMLWidgets.findAll(".leaflet");
+      $.each(maps, function(i, el) {
+        var map = this.getMap();
+        map.invalidateSize();
+        map.eachLayer(function(layer) {
+          if (layer instanceof L.TileLayer)
+            layer.redraw();
+        });
+      });
+    }
+
+    // trigger 'shown' so htmlwidgets resize
+    $('d-article').trigger('shown');
+  }
+
+  function init_distill() {
+
+    init_common();
+
+    // create front matter
+    var front_matter = $('<d-front-matter></d-front-matter>');
+    $('#distill-front-matter').wrap(front_matter);
+
+    // create d-title
+    $('.d-title').changeElementType('d-title');
+
+    // create d-byline
+    var byline = $('<d-byline></d-byline>');
+    $('.d-byline').replaceWith(byline);
+
+    // create d-article
+    var article = $('<d-article></d-article>');
+    $('.d-article').wrap(article).children().unwrap();
+
+    // move posts container into article
+    $('.posts-container').appendTo($('d-article'));
+
+    // create d-appendix
+    $('.d-appendix').changeElementType('d-appendix');
+
+    // flag indicating that we have appendix items
+    var appendix = $('.appendix-bottom').children('h3').length > 0;
+
+    // replace footnotes with <d-footnote>
+    $('.footnote-ref').each(function(i, val) {
+      appendix = true;
+      var href = $(this).attr('href');
+      var id = href.replace('#', '');
+      var fn = $('#' + id);
+      var fn_p = $('#' + id + '>p');
+      fn_p.find('.footnote-back').remove();
+      var text = fn_p.html();
+      var dtfn = $('<d-footnote></d-footnote>');
+      dtfn.html(text);
+      $(this).replaceWith(dtfn);
+    });
+    // remove footnotes
+    $('.footnotes').remove();
+
+    // move refs into #references-listing
+    $('#references-listing').replaceWith($('#refs'));
+
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      var id = $(this).attr('id');
+      $('.d-contents a[href="#' + id + '"]').parent().remove();
+      appendix = true;
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('d-appendix'));
+    });
+
+    // show d-appendix if we have appendix content
+    $("d-appendix").css('display', appendix ? 'grid' : 'none');
+
+    // localize layout chunks to just output
+    $('.layout-chunk').each(function(i, val) {
+
+      // capture layout
+      var layout = $(this).attr('data-layout');
+
+      // apply layout to markdown level block elements
+      var elements = $(this).children().not('details, div.sourceCode, pre, script');
+      elements.each(function(i, el) {
+        var layout_div = $('<div class="' + layout + '"></div>');
+        if (layout_div.hasClass('shaded')) {
+          var shaded_content = $('<div class="shaded-content"></div>');
+          $(this).wrap(shaded_content);
+          $(this).parent().wrap(layout_div);
+        } else {
+          $(this).wrap(layout_div);
+        }
+      });
+
+
+      // unwrap the layout-chunk div
+      $(this).children().unwrap();
+    });
+
+    // remove code block used to force  highlighting css
+    $('.distill-force-highlighting-css').parent().remove();
+
+    // remove empty line numbers inserted by pandoc when using a
+    // custom syntax highlighting theme
+    $('code.sourceCode a:empty').remove();
+
+    // load distill framework
+    load_distill_framework();
+
+    // wait for window.distillRunlevel == 4 to do post processing
+    function distill_post_process() {
+
+      if (!window.distillRunlevel || window.distillRunlevel < 4)
+        return;
+
+      // hide author/affiliations entirely if we have no authors
+      var front_matter = JSON.parse($("#distill-front-matter").html());
+      var have_authors = front_matter.authors && front_matter.authors.length > 0;
+      if (!have_authors)
+        $('d-byline').addClass('hidden');
+
+      // article with toc class
+      $('.d-contents').parent().addClass('d-article-with-toc');
+
+      // strip links that point to #
+      $('.authors-affiliations').find('a[href="#"]').removeAttr('href');
+
+      // add orcid ids
+      $('.authors-affiliations').find('.author').each(function(i, el) {
+        var orcid_id = front_matter.authors[i].orcidID;
+        if (orcid_id) {
+          var a = $('<a></a>');
+          a.attr('href', 'https://orcid.org/' + orcid_id);
+          var img = $('<img></img>');
+          img.addClass('orcid-id');
+          img.attr('alt', 'ORCID ID');
+          img.attr('src','data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDo1N0NEMjA4MDI1MjA2ODExOTk0QzkzNTEzRjZEQTg1NyIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDozM0NDOEJGNEZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDozM0NDOEJGM0ZGNTcxMUUxODdBOEVCODg2RjdCQ0QwOSIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IE1hY2ludG9zaCI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOkZDN0YxMTc0MDcyMDY4MTE5NUZFRDc5MUM2MUUwNEREIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjU3Q0QyMDgwMjUyMDY4MTE5OTRDOTM1MTNGNkRBODU3Ii8+IDwvcmRmOkRlc2NyaXB0aW9uPiA8L3JkZjpSREY+IDwveDp4bXBtZXRhPiA8P3hwYWNrZXQgZW5kPSJyIj8+84NovQAAAR1JREFUeNpiZEADy85ZJgCpeCB2QJM6AMQLo4yOL0AWZETSqACk1gOxAQN+cAGIA4EGPQBxmJA0nwdpjjQ8xqArmczw5tMHXAaALDgP1QMxAGqzAAPxQACqh4ER6uf5MBlkm0X4EGayMfMw/Pr7Bd2gRBZogMFBrv01hisv5jLsv9nLAPIOMnjy8RDDyYctyAbFM2EJbRQw+aAWw/LzVgx7b+cwCHKqMhjJFCBLOzAR6+lXX84xnHjYyqAo5IUizkRCwIENQQckGSDGY4TVgAPEaraQr2a4/24bSuoExcJCfAEJihXkWDj3ZAKy9EJGaEo8T0QSxkjSwORsCAuDQCD+QILmD1A9kECEZgxDaEZhICIzGcIyEyOl2RkgwAAhkmC+eAm0TAAAAABJRU5ErkJggg==');
+          a.append(img);
+          $(this).append(a);
+        }
+      });
+
+      // hide elements of author/affiliations grid that have no value
+      function hide_byline_column(caption) {
+        $('d-byline').find('h3:contains("' + caption + '")').parent().css('visibility', 'hidden');
+      }
+
+      // affiliations
+      var have_affiliations = false;
+      for (var i = 0; i<front_matter.authors.length; ++i) {
+        var author = front_matter.authors[i];
+        if (author.affiliation !== "&nbsp;") {
+          have_affiliations = true;
+          break;
+        }
+      }
+      if (!have_affiliations)
+        $('d-byline').find('h3:contains("Affiliations")').css('visibility', 'hidden');
+
+      // published date
+      if (!front_matter.publishedDate)
+        hide_byline_column("Published");
+
+      // document object identifier
+      var doi = $('d-byline').find('h3:contains("DOI")');
+      var doi_p = doi.next().empty();
+      if (!front_matter.doi) {
+        // if we have a citation and valid citationText then link to that
+        if ($('#citation').length > 0 && front_matter.citationText) {
+          doi.html('Citation');
+          $('<a href="#citation"></a>')
+            .text(front_matter.citationText)
+            .appendTo(doi_p);
+        } else {
+          hide_byline_column("DOI");
+        }
+      } else {
+        $('<a></a>')
+           .attr('href', "https://doi.org/" + front_matter.doi)
+           .html(front_matter.doi)
+           .appendTo(doi_p);
+      }
+
+       // change plural form of authors/affiliations
+      if (front_matter.authors.length === 1) {
+        var grid = $('.authors-affiliations');
+        grid.children('h3:contains("Authors")').text('Author');
+        grid.children('h3:contains("Affiliations")').text('Affiliation');
+      }
+
+      // remove d-appendix and d-footnote-list local styles
+      $('d-appendix > style:first-child').remove();
+      $('d-footnote-list > style:first-child').remove();
+
+      // move appendix-bottom entries to the bottom
+      $('.appendix-bottom').appendTo('d-appendix').children().unwrap();
+      $('.appendix-bottom').remove();
+
+      // hoverable references
+      $('span.citation[data-cites]').each(function() {
+        var refHtml = $('#ref-' + $(this).attr('data-cites')).html();
+        window.tippy(this, {
+          allowHTML: true,
+          content: refHtml,
+          maxWidth: 500,
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start'
+        });
+      });
+
+      // clear polling timer
+      clearInterval(tid);
+
+      // show body now that everything is ready
+      on_load_complete();
+    }
+
+    var tid = setInterval(distill_post_process, 50);
+    distill_post_process();
+
+  }
+
+  function init_downlevel() {
+
+    init_common();
+
+     // insert hr after d-title
+    $('.d-title').after($('<hr class="section-separator"/>'));
+
+    // check if we have authors
+    var front_matter = JSON.parse($("#distill-front-matter").html());
+    var have_authors = front_matter.authors && front_matter.authors.length > 0;
+
+    // manage byline/border
+    if (!have_authors)
+      $('.d-byline').remove();
+    $('.d-byline').after($('<hr class="section-separator"/>'));
+    $('.d-byline a').remove();
+
+    // remove toc
+    $('.d-contents').remove();
+
+    // move appendix elements
+    $('h1.appendix, h2.appendix').each(function(i, val) {
+      $(this).changeElementType('h3');
+    });
+    $('h3.appendix').each(function(i, val) {
+      $(this).nextUntil($('h1, h2, h3')).addBack().appendTo($('.d-appendix'));
+    });
+
+
+    // inject headers into references and footnotes
+    var refs_header = $('<h3></h3>');
+    refs_header.text('References');
+    $('#refs').prepend(refs_header);
+
+    var footnotes_header = $('<h3></h3');
+    footnotes_header.text('Footnotes');
+    $('.footnotes').children('hr').first().replaceWith(footnotes_header);
+
+    // move appendix-bottom entries to the bottom
+    $('.appendix-bottom').appendTo('.d-appendix').children().unwrap();
+    $('.appendix-bottom').remove();
+
+    // remove appendix if it's empty
+    if ($('.d-appendix').children().length === 0)
+      $('.d-appendix').remove();
+
+    // prepend separator above appendix
+    $('.d-appendix').before($('<hr class="section-separator" style="clear: both"/>'));
+
+    // trim code
+    $('pre>code').each(function(i, val) {
+      $(this).html($.trim($(this).html()));
+    });
+
+    // move posts-container right before article
+    $('.posts-container').insertBefore($('.d-article'));
+
+    $('body').addClass('downlevel');
+
+    on_load_complete();
+  }
+
+
+  function init_common() {
+
+    // jquery plugin to change element types
+    (function($) {
+      $.fn.changeElementType = function(newType) {
+        var attrs = {};
+
+        $.each(this[0].attributes, function(idx, attr) {
+          attrs[attr.nodeName] = attr.nodeValue;
+        });
+
+        this.replaceWith(function() {
+          return $("<" + newType + "/>", attrs).append($(this).contents());
+        });
+      };
+    })(jQuery);
+
+    // prevent underline for linked images
+    $('a > img').parent().css({'border-bottom' : 'none'});
+
+    // mark non-body figures created by knitr chunks as 100% width
+    $('.layout-chunk').each(function(i, val) {
+      var figures = $(this).find('img, .html-widget');
+      if ($(this).attr('data-layout') !== "l-body") {
+        figures.css('width', '100%');
+      } else {
+        figures.css('max-width', '100%');
+        figures.filter("[width]").each(function(i, val) {
+          var fig = $(this);
+          fig.css('width', fig.attr('width') + 'px');
+        });
+
+      }
+    });
+
+    // auto-append index.html to post-preview links in file: protocol
+    // and in rstudio ide preview
+    $('.post-preview').each(function(i, val) {
+      if (window.location.protocol === "file:")
+        $(this).attr('href', $(this).attr('href') + "index.html");
+    });
+
+    // get rid of index.html references in header
+    if (window.location.protocol !== "file:") {
+      $('.distill-site-header a[href]').each(function(i,val) {
+        $(this).attr('href', $(this).attr('href').replace("index.html", "./"));
+      });
+    }
+
+    // add class to pandoc style tables
+    $('tr.header').parent('thead').parent('table').addClass('pandoc-table');
+    $('.kable-table').children('table').addClass('pandoc-table');
+
+    // add figcaption style to table captions
+    $('caption').parent('table').addClass("figcaption");
+
+    // initialize posts list
+    if (window.init_posts_list)
+      window.init_posts_list();
+
+    // implmement disqus comment link
+    $('.disqus-comment-count').click(function() {
+      window.headroom_prevent_pin = true;
+      $('#disqus_thread').toggleClass('hidden');
+      if (!$('#disqus_thread').hasClass('hidden')) {
+        var offset = $(this).offset();
+        $(window).resize();
+        $('html, body').animate({
+          scrollTop: offset.top - 35
+        });
+      }
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    if (is_downlevel_browser())
+      init_downlevel();
+    else
+      window.addEventListener('WebComponentsReady', init_distill);
+  });
+
+  </script>
+
+  <!--/radix_placeholder_distill-->
+  <script src="subset-the-model_files/header-attrs-2.6/header-attrs.js"></script>
+  <script src="subset-the-model_files/jquery-1.11.3/jquery.min.js"></script>
+  <script src="subset-the-model_files/popper-2.6.0/popper.min.js"></script>
+  <link href="subset-the-model_files/tippy-6.2.7/tippy.css" rel="stylesheet" />
+  <link href="subset-the-model_files/tippy-6.2.7/tippy-light-border.css" rel="stylesheet" />
+  <script src="subset-the-model_files/tippy-6.2.7/tippy.umd.min.js"></script>
+  <script src="subset-the-model_files/anchor-4.2.2/anchor.min.js"></script>
+  <script src="subset-the-model_files/bowser-1.9.3/bowser.min.js"></script>
+  <script src="subset-the-model_files/webcomponents-2.0.0/webcomponents.js"></script>
+  <script src="subset-the-model_files/distill-2.2.21/template.v2.js"></script>
+  <!--radix_placeholder_site_in_header-->
+  <!--/radix_placeholder_site_in_header-->
+
+
+</head>
+
+<body>
+
+<!--radix_placeholder_front_matter-->
+
+<script id="distill-front-matter" type="text/json">
+{"title":"Subset the Model","description":"Subset the model by Stepwise in R.","authors":[{"author":"Hui-Chia HungWen","authorURL":"https://hhungwen.github.io/SP_hhungwen.github.io/","affiliation":"&nbsp;","affiliationURL":"#","orcidID":""}],"publishedDate":"2021-06-22T00:00:00.000+00:00","citationText":"HungWen, 2021"}
+</script>
+
+<!--/radix_placeholder_front_matter-->
+<!--radix_placeholder_navigation_before_body-->
+<!--/radix_placeholder_navigation_before_body-->
+<!--radix_placeholder_site_before_body-->
+<!--/radix_placeholder_site_before_body-->
+
+<div class="d-title">
+<h1>Subset the Model</h1>
+<!--radix_placeholder_categories-->
+<!--/radix_placeholder_categories-->
+<p><p>Subset the model by Stepwise in R.</p></p>
+</div>
+
+<div class="d-byline">
+  Hui-Chia HungWen <a href="https://hhungwen.github.io/SP_hhungwen.github.io/" class="uri">https://hhungwen.github.io/SP_hhungwen.github.io/</a> 
+  
+<br/>06-22-2021
+</div>
+
+<div class="d-article">
+<h1 id="為什麼需要子集法subsets-selection">為什麼需要子集法Subsets selection?</h1>
+<p>線性迴歸有許多變形(variants)，主要是因為實務上的情況往往不會跟理論假設一樣，因此若單純使用線性迴歸，可能會產生許多問題。例如常常都會遇到overfitting的問題，這時候就必須要試圖降低「模型的複雜度」。</p>
+<h1 id="stepwise-是什麼">Stepwise 是什麼？</h1>
+<p>Stepwise 「逐步回歸法」</p>
+<p>逐步回歸法的核心概念很簡單，就是試著找出比較簡單的模型，就能達成跟原模型差不多的表現與效果。</p>
+<p>舉個例子，假設現在資料中有 x1 ~ x5 五個變數，那線性迴歸就能寫成：</p>
+<p>y = a + b1 * x1 + b2 * x2 + b3 * x3 + b4 * x4 + b5 * x5</p>
+<p>Stepwise Regression只需要建構「一個 模型」，然後在上面直接新增(或減少)變數。</p>
+<p>一般有兩種方法：向前選取法(Forward)跟向後選取法(Backward)：</p>
+<ul>
+<li><p>Forward Stepwise：在一個空的迴歸中，逐一添加變數，直到任何一個變數的額外貢獻度(AIC值)已經沒有統計意義了，那就停止。(p &gt;&gt; n 可以使用)</p></li>
+<li><p>Backward Stepwise：在一個完整的迴歸中，逐一移除變數，直到移除任何一個變數時，模型都會損失過多的解釋力，那就停止。(只有 n &gt; p 才可以使用)</p></li>
+<li><p>Both：以上兩種方法的結合， 同時考量新增/移除變數對模型的影響，缺點是運算效率會比較慢。</p></li>
+</ul>
+<p>要注意的是，Forward 在新增變數後就不會再取出，並以現狀為基準，來衡量後續添加變數的貢獻，因此有時候會因為添加順序而產生問題(例如，一開始先選 x1，那接下來就會選 x2；可是如果先選 x2，卻不保證接下來一定會選 x1)。Backward 跟 Both 也同理。</p>
+<h1 id="r-code-for-stepwise-regression">R code for stepwise Regression</h1>
+<p>在R裡面，要建立 Stepwise Regression，會使用step()的函式。(已在R的內建package stats中)</p>
+<p>以下會用我專題報告的房屋交易紀錄資料要來示範Stepwise Regression.<br />
+在此房價交易紀錄中, <em>Price_Meter</em> (坪)為依變數Dependent variable, 代表每筆房屋交易紀錄每坪的平均價格.</p>
+先將資料分成 Train (0.8)＆ Test (0.2)<br />
+
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>13</span><span class='op'>)</span>
+<span class='va'>train.index</span><span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>ModelData</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>ceiling</a></span><span class='op'>(</span><span class='fl'>0.8</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>ModelData</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>train</span> <span class='op'>=</span> <span class='va'>ModelData</span><span class='op'>[</span><span class='va'>train.index</span>,<span class='op'>]</span>
+<span class='va'>test</span> <span class='op'>=</span> <span class='va'>ModelData</span><span class='op'>[</span><span class='op'>-</span><span class='va'>train.index</span>,<span class='op'>]</span>
+</code></pre>
+</div>
+</div>
+<h2 id="forward-stepwise-regression">Forward Stepwise Regression</h2>
+<p>使用Forward Stepwise Regression ，步驟有兩個：</p>
+<ul>
+<li><p>建立空的線性迴歸(只有截距項)</p></li>
+<li><p>用step()，一個一個把變數丟進去，看哪個變數貢獻最多！(衡量AIC)</p></li>
+<li><p>Step 1</p></li>
+</ul>
+建立上界，也就是完整的線性迴歸<br />
+
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>null</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Price_Meter</span> <span class='op'>~</span> <span class='fl'>1</span>, data <span class='op'>=</span> <span class='va'>train</span><span class='op'>)</span>  
+<span class='va'>full</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Price_Meter</span> <span class='op'>~</span> <span class='va'>.</span>, data <span class='op'>=</span> <span class='va'>train</span><span class='op'>)</span> 
+</code></pre>
+</div>
+</div>
+<ul>
+<li>Step 2</li>
+</ul>
+<p>使用step()，一個一個把變數丟進去<br />
+從空模型開始，一個一個丟變數，<br />
+最大不會超過完整的線性迴歸<br />
+(一定要加上界 upper=full，不可以不加)</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>forward.lm</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/step.html'>step</a></span><span class='op'>(</span><span class='va'>null</span>, 
+                  scope<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>lower<span class='op'>=</span><span class='va'>null</span>, upper<span class='op'>=</span><span class='va'>full</span><span class='op'>)</span>,
+                  direction<span class='op'>=</span><span class='st'>"forward"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Start:  AIC=4803.94
+Price_Meter ~ 1
+
+                  Df Sum of Sq   RSS    AIC
++ Note             2    8090.4 16731 4078.6
++ Build_Date       1    6642.3 18179 4230.1
++ Build_Age        1    6462.2 18359 4248.3
++ Build_Type       4    4036.8 20784 4483.8
++ Total_Area       1    2042.2 22779 4647.2
++ Rank_PopDensity  1    1004.0 23817 4729.6
++ Unit_Bath        1     855.1 23966 4741.1
++ Rank_CityCenter  1     603.9 24217 4760.4
++ Total_Floor      1     556.8 24264 4764.0
++ Build_Material   5     558.6 24262 4771.9
++ Trade_Date       1     293.0 24528 4784.0
++ Land_Area        1     280.3 24541 4784.9
++ Rank_Train       1     271.9 24549 4785.6
++ Unit_Floor       1     221.2 24600 4789.4
++ Rank_Taipei      1     211.8 24609 4790.1
++ Unit_Living      1     186.9 24634 4792.0
++ Unit_Room        1     107.0 24714 4798.0
++ Rank_Market      1      95.4 24726 4798.8
++ interest_rate    1      27.9 24793 4803.9
+&lt;none&gt;                         24821 4803.9
+
+Step:  AIC=4078.6
+Price_Meter ~ Note
+
+                  Df Sum of Sq   RSS    AIC
++ Rank_Taipei      1    953.28 15777 3972.1
++ Build_Type       4    529.91 16201 4027.1
++ Build_Date       1    204.50 16526 4057.9
++ Rank_PopDensity  1    182.87 16548 4060.3
++ Build_Age        1    149.31 16581 4064.0
++ Rank_Train       1    125.37 16605 4066.7
++ Total_Area       1     38.94 16692 4076.3
++ Rank_Market      1     37.63 16693 4076.4
++ Total_Floor      1     24.50 16706 4077.9
++ Trade_Date       1     21.99 16709 4078.2
++ Build_Material   5     92.75 16638 4078.3
++ Unit_Living      1     19.69 16711 4078.4
+&lt;none&gt;                         16731 4078.6
++ Unit_Floor       1      8.18 16722 4079.7
++ interest_rate    1      4.71 16726 4080.1
++ Rank_CityCenter  1      3.42 16727 4080.2
++ Land_Area        1      2.71 16728 4080.3
++ Unit_Room        1      1.63 16729 4080.4
++ Unit_Bath        1      0.73 16730 4080.5
+
+Step:  AIC=3972.13
+Price_Meter ~ Note + Rank_Taipei
+
+                  Df Sum of Sq   RSS    AIC
++ Build_Type       4    420.29 15357 3930.2
++ Rank_PopDensity  1    284.89 15492 3940.4
++ Build_Date       1    152.89 15624 3956.1
++ Rank_CityCenter  1    138.73 15639 3957.8
++ Rank_Market      1    116.28 15661 3960.4
++ Build_Age        1    104.61 15673 3961.8
++ Rank_Train       1     98.35 15679 3962.6
++ Total_Area       1     57.65 15720 3967.4
++ Total_Floor      1     37.47 15740 3969.7
++ Land_Area        1     33.29 15744 3970.2
++ Trade_Date       1     23.89 15754 3971.3
+&lt;none&gt;                         15777 3972.1
++ Unit_Living      1     16.63 15761 3972.2
++ Build_Material   5     82.57 15695 3972.4
++ interest_rate    1      6.76 15771 3973.3
++ Unit_Floor       1      6.05 15771 3973.4
++ Unit_Room        1      1.94 15775 3973.9
++ Unit_Bath        1      1.00 15776 3974.0
+
+Step:  AIC=3930.2
+Price_Meter ~ Note + Rank_Taipei + Build_Type
+
+                  Df Sum of Sq   RSS    AIC
++ Rank_PopDensity  1    379.62 14977 3885.9
++ Rank_CityCenter  1    204.28 15153 3907.4
++ Rank_Market      1    192.92 15164 3908.8
++ Rank_Train       1    135.11 15222 3915.9
++ Build_Date       1    125.24 15232 3917.1
++ Build_Age        1     86.45 15271 3921.8
++ Unit_Room        1     61.92 15295 3924.7
++ Build_Material   5     86.76 15270 3929.7
++ Unit_Bath        1     20.29 15337 3929.8
++ Total_Area       1     19.02 15338 3929.9
+&lt;none&gt;                         15357 3930.2
++ Trade_Date       1     15.62 15341 3930.3
++ Land_Area        1      8.63 15348 3931.2
++ interest_rate    1      6.92 15350 3931.4
++ Total_Floor      1      6.39 15351 3931.4
++ Unit_Floor       1      0.93 15356 3932.1
++ Unit_Living      1      0.73 15356 3932.1
+
+Step:  AIC=3885.92
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity
+
+                  Df Sum of Sq   RSS    AIC
++ Build_Date       1    86.514 14891 3877.2
++ Build_Age        1    63.084 14914 3880.1
++ Unit_Room        1    56.462 14921 3880.9
++ Build_Material   5   118.569 14859 3881.2
++ Rank_CityCenter  1    39.413 14938 3883.1
++ Unit_Bath        1    34.918 14942 3883.6
++ Total_Area       1    27.884 14950 3884.5
++ Total_Floor      1    26.846 14951 3884.6
++ Land_Area        1    26.015 14951 3884.7
+&lt;none&gt;                         14977 3885.9
++ Rank_Market      1    14.359 14963 3886.2
++ Trade_Date       1     6.447 14971 3887.1
++ Rank_Train       1     2.827 14975 3887.6
++ interest_rate    1     2.264 14975 3887.6
++ Unit_Floor       1     0.086 14977 3887.9
++ Unit_Living      1     0.000 14977 3887.9
+
+Step:  AIC=3877.21
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date
+
+                  Df Sum of Sq   RSS    AIC
++ Build_Material   5   238.207 14653 3857.4
++ Unit_Room        1    51.560 14839 3872.8
++ Total_Area       1    49.891 14841 3873.0
++ Rank_CityCenter  1    47.960 14843 3873.2
++ Land_Area        1    38.766 14852 3874.4
++ Unit_Bath        1    29.591 14861 3875.5
+&lt;none&gt;                         14891 3877.2
++ Total_Floor      1    15.537 14875 3877.3
++ Rank_Market      1    10.913 14880 3877.9
++ Rank_Train       1     6.826 14884 3878.4
++ Build_Age        1     2.189 14889 3878.9
++ Trade_Date       1     1.184 14890 3879.1
++ interest_rate    1     0.129 14891 3879.2
++ Unit_Floor       1     0.073 14891 3879.2
++ Unit_Living      1     0.040 14891 3879.2
+
+Step:  AIC=3857.4
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date + Build_Material
+
+                  Df Sum of Sq   RSS    AIC
++ Unit_Room        1    79.804 14573 3849.3
++ Unit_Bath        1    47.038 14606 3853.5
++ Rank_CityCenter  1    43.671 14609 3853.9
++ Total_Area       1    26.900 14626 3856.0
++ Land_Area        1    26.333 14626 3856.1
+&lt;none&gt;                         14653 3857.4
++ Total_Floor      1    15.680 14637 3857.4
++ Rank_Market      1    12.779 14640 3857.8
++ Rank_Train       1     7.323 14645 3858.5
++ Build_Age        1     1.115 14652 3859.3
++ Trade_Date       1     0.466 14652 3859.3
++ interest_rate    1     0.032 14653 3859.4
++ Unit_Living      1     0.004 14653 3859.4
++ Unit_Floor       1     0.003 14653 3859.4
+
+Step:  AIC=3849.3
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date + Build_Material + Unit_Room
+
+                  Df Sum of Sq   RSS    AIC
++ Total_Area       1    99.237 14474 3838.7
++ Land_Area        1    52.517 14520 3844.6
++ Rank_CityCenter  1    40.349 14533 3846.2
++ Total_Floor      1    18.460 14554 3849.0
+&lt;none&gt;                         14573 3849.3
++ Rank_Market      1     9.754 14563 3850.1
++ Unit_Bath        1     8.680 14564 3850.2
++ Rank_Train       1     6.331 14567 3850.5
++ Unit_Living      1     3.603 14569 3850.8
++ Build_Age        1     0.497 14572 3851.2
++ interest_rate    1     0.387 14572 3851.2
++ Trade_Date       1     0.142 14573 3851.3
++ Unit_Floor       1     0.008 14573 3851.3
+
+Step:  AIC=3838.66
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date + Build_Material + Unit_Room + Total_Area
+
+                  Df Sum of Sq   RSS    AIC
++ Rank_CityCenter  1    35.600 14438 3836.1
++ Unit_Bath        1    33.281 14440 3836.4
++ Total_Floor      1    27.767 14446 3837.1
++ Rank_Market      1    18.796 14455 3838.3
+&lt;none&gt;                         14474 3838.7
++ Rank_Train       1    14.681 14459 3838.8
++ Land_Area        1    11.336 14462 3839.2
++ interest_rate    1     0.481 14473 3840.6
++ Build_Age        1     0.456 14473 3840.6
++ Unit_Living      1     0.143 14474 3840.6
++ Trade_Date       1     0.086 14474 3840.7
++ Unit_Floor       1     0.002 14474 3840.7
+
+Step:  AIC=3836.11
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date + Build_Material + Unit_Room + Total_Area + Rank_CityCenter
+
+                Df Sum of Sq   RSS    AIC
++ Total_Floor    1    36.780 14401 3833.4
++ Unit_Bath      1    34.896 14403 3833.6
++ Rank_Market    1    18.857 14419 3835.7
+&lt;none&gt;                       14438 3836.1
++ Land_Area      1    10.892 14427 3836.7
++ Rank_Train     1    10.561 14428 3836.8
++ interest_rate  1     0.511 14438 3838.0
++ Build_Age      1     0.430 14438 3838.1
++ Unit_Floor     1     0.166 14438 3838.1
++ Trade_Date     1     0.075 14438 3838.1
++ Unit_Living    1     0.008 14438 3838.1
+
+Step:  AIC=3833.39
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date + Build_Material + Unit_Room + Total_Area + Rank_CityCenter + 
+    Total_Floor
+
+                Df Sum of Sq   RSS    AIC
++ Unit_Bath      1    38.220 14363 3830.5
++ Rank_Market    1    15.799 14386 3833.4
+&lt;none&gt;                       14401 3833.4
++ Rank_Train     1    10.271 14391 3834.1
++ Unit_Floor     1     6.815 14394 3834.5
++ Land_Area      1     5.399 14396 3834.7
++ interest_rate  1     0.645 14401 3835.3
++ Build_Age      1     0.138 14401 3835.4
++ Unit_Living    1     0.007 14401 3835.4
++ Trade_Date     1     0.000 14401 3835.4
+
+Step:  AIC=3830.48
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date + Build_Material + Unit_Room + Total_Area + Rank_CityCenter + 
+    Total_Floor + Unit_Bath
+
+                Df Sum of Sq   RSS    AIC
+&lt;none&gt;                       14363 3830.5
++ Rank_Market    1   15.3977 14348 3830.5
++ Rank_Train     1   13.7434 14349 3830.7
++ Unit_Floor     1    6.8844 14356 3831.6
++ Land_Area      1    6.4760 14357 3831.6
++ Unit_Living    1    0.5002 14363 3832.4
++ interest_rate  1    0.4574 14363 3832.4
++ Build_Age      1    0.1798 14363 3832.5
++ Trade_Date     1    0.0040 14363 3832.5</code></pre>
+</div>
+<p>訓練過程中,我們可以觀察到是譖麼每一次增加變數到模型內的.<br />
+這裡是用AIC指標來衡量每個變數的貢獻度.（ＡＩＣ值越小越好.）</p>
+<ul>
+<li><p>空的模型的AIC = 4803.95<br />
+從variables中挑選 AIC 值最小的 Note</p></li>
+<li><p>~ Note 之後 AIC = 4078.6<br />
+挑選 AIC 值最小的 Rank_Taipei</p></li>
+<li><p>~ Note+Rank_Taipei 之後 AIC = 3972.13<br />
+挑選 AIC 值最小的 Build_Type</p></li>
+</ul>
+<p>依此類推</p>
+<p>.<br />
+.<br />
+.</p>
+<ul>
+<li>~ Note+Rank_Taipei+Build_Type 之後 AIC = 3930.2</li>
+<li>~ Note+Rank_Taipei+Build_Type+Rank_PopDensity AIC = 3885.92<br />
+</li>
+<li>~ Note+Rank_Taipei+Build_Type+Rank_PopDensity+Build_Date AIC = 3877.21</li>
+</ul>
+<p>.<br />
+.<br />
+.<br />
+直到發現如果新增邊變數時,AIC上升,就停止了.<br />
+最終的Model如下：</p>
+<ul>
+<li>~ Note+Rank_Taipei+Build_Type+Rank_PopDensity+Build_Date+Buils_Material+ Unit_Room+Total_Area+Rank_CityCenter+Total_Floor AIC = 3833.39</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>forward.lm</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = Price_Meter ~ Note + Rank_Taipei + Build_Type + 
+    Rank_PopDensity + Build_Date + Build_Material + Unit_Room + 
+    Total_Area + Rank_CityCenter + Total_Floor + Unit_Bath, data = train)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-9.1649 -1.9163 -0.3594  1.6663 19.0636 
+
+Coefficients:
+                                      Estimate Std. Error t value
+(Intercept)                          1.236e+01  9.721e-01  12.715
+Note6~15                             2.414e+00  3.976e-01   6.071
+Noteover 30                          1.585e+00  4.023e-01   3.940
+Rank_Taipei                         -2.864e-01  3.524e-02  -8.127
+Build_TypeApartment under 11 floors  1.219e+00  2.791e-01   4.368
+Build_TypeHouse                      5.959e-01  4.243e-01   1.404
+Build_TypeStudio                     1.345e+00  3.286e-01   4.094
+Build_TypeWalk-Up Apartment         -1.449e-01  3.485e-01  -0.416
+Rank_PopDensity                     -4.444e-01  7.814e-02  -5.688
+Build_Date                           3.832e-04  7.155e-05   5.355
+Build_Material磚造                  -2.463e+00  2.032e+00  -1.212
+Build_Material見其他登記事項         1.624e+00  2.025e+00   0.802
+Build_Material鋼筋混凝土加強磚造    -2.565e-01  5.279e-01  -0.486
+Build_Material鋼筋混凝土造          -1.622e+00  4.648e-01  -3.489
+Build_Material鋼骨鋼筋混凝土造       2.128e+00  1.347e+00   1.580
+Unit_Room                            4.276e-01  1.281e-01   3.339
+Total_Area                          -3.025e-02  7.368e-03  -4.105
+Rank_CityCenter                     -1.993e-01  8.152e-02  -2.445
+Total_Floor                          6.466e-02  2.861e-02   2.260
+Unit_Bath                            3.170e-01  1.437e-01   2.206
+                                    Pr(&gt;|t|)    
+(Intercept)                          &lt; 2e-16 ***
+Note6~15                            1.54e-09 ***
+Noteover 30                         8.45e-05 ***
+Rank_Taipei                         8.01e-16 ***
+Build_TypeApartment under 11 floors 1.33e-05 ***
+Build_TypeHouse                     0.160345    
+Build_TypeStudio                    4.43e-05 ***
+Build_TypeWalk-Up Apartment         0.677568    
+Rank_PopDensity                     1.49e-08 ***
+Build_Date                          9.62e-08 ***
+Build_Material磚造                  0.225565    
+Build_Material見其他登記事項        0.422547    
+Build_Material鋼筋混凝土加強磚造    0.627095    
+Build_Material鋼筋混凝土造          0.000496 ***
+Build_Material鋼骨鋼筋混凝土造      0.114359    
+Unit_Room                           0.000856 ***
+Total_Area                          4.21e-05 ***
+Rank_CityCenter                     0.014579 *  
+Total_Floor                         0.023947 *  
+Unit_Bath                           0.027499 *  
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 2.802 on 1829 degrees of freedom
+Multiple R-squared:  0.4213,    Adjusted R-squared:  0.4153 
+F-statistic: 70.09 on 19 and 1829 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<p>最終的模型summary<br />
+Adj R-squared = 0.4153</p>
+<p>Forward的概念是用挑選的, 所以保留於模型中的變數都是被挑選出來的重要變數.<br />
+也可以再更深入的去看每一個變數的p-value再去決定自己模型的使用變數.</p>
+<h2 id="backward-stepwise-regression">Backward Stepwise Regression</h2>
+<p>使用Backward Stepwise Regression的步驟也是兩個,只是從完整的模型中一個一個把變數移除,看看哪個變數移除後的AIC下降最多!</p>
+<ul>
+<li>Step 1<br />
+先建立一個完整的線性迴歸</li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>21</span><span class='op'>)</span>
+<span class='va'>Btrain.index</span><span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span>x<span class='op'>=</span><span class='fl'>1</span><span class='op'>:</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>ModelData</span><span class='op'>)</span>, size <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>ceiling</a></span><span class='op'>(</span><span class='fl'>0.8</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>ModelData</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>Btrain</span> <span class='op'>=</span> <span class='va'>ModelData</span><span class='op'>[</span><span class='va'>Btrain.index</span>,<span class='op'>]</span>
+<span class='va'>Btest</span> <span class='op'>=</span> <span class='va'>ModelData</span><span class='op'>[</span><span class='op'>-</span><span class='va'>Btrain.index</span>,<span class='op'>]</span>
+<span class='va'>Bfull</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/lm.html'>lm</a></span><span class='op'>(</span><span class='va'>Price_Meter</span> <span class='op'>~</span> <span class='va'>.</span>, data <span class='op'>=</span> <span class='va'>Btrain</span><span class='op'>)</span>  
+</code></pre>
+</div>
+</div>
+<ul>
+<li>Step 2</li>
+</ul>
+<p>用step()，一個一個把變數移除，看移除哪個變數後 AIC 下降最多<br />
+這裡可以加下界(lower=null)，也可以不加</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>backward.lm</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/step.html'>step</a></span><span class='op'>(</span><span class='va'>Bfull</span>, 
+                   scope <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>upper<span class='op'>=</span><span class='va'>Bfull</span><span class='op'>)</span>, 
+                   direction<span class='op'>=</span><span class='st'>"backward"</span><span class='op'>)</span>  
+</code></pre>
+</div>
+<pre><code>Start:  AIC=3946.97
+Price_Meter ~ Land_Area + Trade_Date + Unit_Floor + Total_Floor + 
+    Build_Type + Build_Material + Build_Date + Build_Age + Total_Area + 
+    Unit_Room + Unit_Living + Unit_Bath + Note + Rank_CityCenter + 
+    Rank_Market + Rank_Taipei + Rank_Train + Rank_PopDensity + 
+    interest_rate
+
+                  Df Sum of Sq   RSS    AIC
+- Unit_Living      1      0.00 15165 3945.0
+- Rank_Train       1      0.02 15165 3945.0
+- interest_rate    1      1.06 15166 3945.1
+- Land_Area        1      4.27 15170 3945.5
+- Unit_Floor       1      5.29 15171 3945.6
+- Build_Age        1      6.35 15172 3945.7
+- Trade_Date       1      6.93 15172 3945.8
+- Unit_Bath        1     11.22 15176 3946.3
+&lt;none&gt;                         15165 3947.0
+- Build_Date       1     18.89 15184 3947.3
+- Rank_Market      1     25.10 15190 3948.0
+- Rank_CityCenter  1     47.07 15212 3950.7
+- Total_Floor      1     50.91 15216 3951.2
+- Total_Area       1     61.37 15227 3952.4
+- Unit_Room        1    111.13 15276 3958.5
+- Rank_PopDensity  1    197.22 15362 3968.9
+- Rank_Taipei      1    217.25 15383 3971.3
+- Build_Material   5    318.13 15483 3975.4
+- Build_Type       4    451.08 15616 3993.2
+- Note             2   1286.22 16452 4093.5
+
+Step:  AIC=3944.97
+Price_Meter ~ Land_Area + Trade_Date + Unit_Floor + Total_Floor + 
+    Build_Type + Build_Material + Build_Date + Build_Age + Total_Area + 
+    Unit_Room + Unit_Bath + Note + Rank_CityCenter + Rank_Market + 
+    Rank_Taipei + Rank_Train + Rank_PopDensity + interest_rate
+
+                  Df Sum of Sq   RSS    AIC
+- Rank_Train       1      0.02 15165 3943.0
+- interest_rate    1      1.06 15166 3943.1
+- Land_Area        1      4.27 15170 3943.5
+- Unit_Floor       1      5.29 15171 3943.6
+- Build_Age        1      6.35 15172 3943.7
+- Trade_Date       1      6.93 15172 3943.8
+- Unit_Bath        1     11.40 15177 3944.4
+&lt;none&gt;                         15165 3945.0
+- Build_Date       1     18.91 15184 3945.3
+- Rank_Market      1     25.23 15190 3946.0
+- Rank_CityCenter  1     47.09 15212 3948.7
+- Total_Floor      1     51.01 15216 3949.2
+- Total_Area       1     62.19 15228 3950.5
+- Unit_Room        1    111.26 15277 3956.5
+- Rank_PopDensity  1    197.29 15363 3966.9
+- Rank_Taipei      1    217.52 15383 3969.3
+- Build_Material   5    318.13 15484 3973.4
+- Build_Type       4    460.41 15626 3992.3
+- Note             2   1290.02 16455 4091.9
+
+Step:  AIC=3942.98
+Price_Meter ~ Land_Area + Trade_Date + Unit_Floor + Total_Floor + 
+    Build_Type + Build_Material + Build_Date + Build_Age + Total_Area + 
+    Unit_Room + Unit_Bath + Note + Rank_CityCenter + Rank_Market + 
+    Rank_Taipei + Rank_PopDensity + interest_rate
+
+                  Df Sum of Sq   RSS    AIC
+- interest_rate    1      1.05 15166 3941.1
+- Land_Area        1      4.26 15170 3941.5
+- Unit_Floor       1      5.30 15171 3941.6
+- Build_Age        1      6.34 15172 3941.7
+- Trade_Date       1      6.91 15172 3941.8
+- Unit_Bath        1     11.63 15177 3942.4
+&lt;none&gt;                         15165 3943.0
+- Build_Date       1     18.90 15184 3943.3
+- Rank_Market      1     34.01 15199 3945.1
+- Rank_CityCenter  1     47.57 15213 3946.8
+- Total_Floor      1     51.13 15216 3947.2
+- Total_Area       1     63.05 15228 3948.6
+- Unit_Room        1    111.26 15277 3954.5
+- Rank_Taipei      1    239.07 15404 3969.9
+- Build_Material   5    318.14 15484 3971.4
+- Rank_PopDensity  1    297.06 15462 3976.8
+- Build_Type       4    465.19 15630 3990.8
+- Note             2   1293.12 16458 4090.3
+
+Step:  AIC=3941.1
+Price_Meter ~ Land_Area + Trade_Date + Unit_Floor + Total_Floor + 
+    Build_Type + Build_Material + Build_Date + Build_Age + Total_Area + 
+    Unit_Room + Unit_Bath + Note + Rank_CityCenter + Rank_Market + 
+    Rank_Taipei + Rank_PopDensity
+
+                  Df Sum of Sq   RSS    AIC
+- Land_Area        1      4.38 15171 3939.6
+- Unit_Floor       1      5.18 15172 3939.7
+- Trade_Date       1      5.92 15172 3939.8
+- Build_Age        1      6.27 15173 3939.9
+- Unit_Bath        1     11.47 15178 3940.5
+&lt;none&gt;                         15166 3941.1
+- Build_Date       1     18.79 15185 3941.4
+- Rank_Market      1     34.20 15201 3943.3
+- Rank_CityCenter  1     47.73 15214 3944.9
+- Total_Floor      1     50.64 15217 3945.3
+- Total_Area       1     63.10 15230 3946.8
+- Unit_Room        1    112.12 15278 3952.7
+- Rank_Taipei      1    238.52 15405 3968.0
+- Build_Material   5    318.20 15485 3969.5
+- Rank_PopDensity  1    297.84 15464 3975.1
+- Build_Type       4    464.18 15631 3988.8
+- Note             2   1292.43 16459 4088.3
+
+Step:  AIC=3939.64
+Price_Meter ~ Trade_Date + Unit_Floor + Total_Floor + Build_Type + 
+    Build_Material + Build_Date + Build_Age + Total_Area + Unit_Room + 
+    Unit_Bath + Note + Rank_CityCenter + Rank_Market + Rank_Taipei + 
+    Rank_PopDensity
+
+                  Df Sum of Sq   RSS    AIC
+- Unit_Floor       1      5.00 15176 3938.2
+- Trade_Date       1      6.00 15177 3938.4
+- Build_Age        1      6.33 15177 3938.4
+- Unit_Bath        1     10.74 15182 3938.9
+&lt;none&gt;                         15171 3939.6
+- Build_Date       1     18.83 15190 3939.9
+- Rank_Market      1     35.83 15207 3942.0
+- Rank_CityCenter  1     49.18 15220 3943.6
+- Total_Floor      1     56.66 15227 3944.5
+- Total_Area       1     90.94 15262 3948.7
+- Unit_Room        1    112.18 15283 3951.3
+- Rank_Taipei      1    234.16 15405 3966.0
+- Build_Material   5    320.56 15491 3968.3
+- Rank_PopDensity  1    301.39 15472 3974.0
+- Build_Type       4    459.80 15631 3986.8
+- Note             2   1288.22 16459 4086.3
+
+Step:  AIC=3938.25
+Price_Meter ~ Trade_Date + Total_Floor + Build_Type + Build_Material + 
+    Build_Date + Build_Age + Total_Area + Unit_Room + Unit_Bath + 
+    Note + Rank_CityCenter + Rank_Market + Rank_Taipei + Rank_PopDensity
+
+                  Df Sum of Sq   RSS    AIC
+- Trade_Date       1      6.29 15182 3937.0
+- Build_Age        1      6.45 15182 3937.0
+- Unit_Bath        1     10.68 15186 3937.5
+&lt;none&gt;                         15176 3938.2
+- Build_Date       1     19.03 15195 3938.6
+- Rank_Market      1     36.02 15212 3940.6
+- Rank_CityCenter  1     49.55 15225 3942.3
+- Total_Floor      1     52.73 15228 3942.7
+- Total_Area       1     89.54 15265 3947.1
+- Unit_Room        1    109.78 15286 3949.6
+- Rank_Taipei      1    232.83 15409 3964.4
+- Build_Material   5    321.91 15498 3967.1
+- Rank_PopDensity  1    302.52 15478 3972.7
+- Build_Type       4    456.38 15632 3985.0
+- Note             2   1286.80 16463 4084.7
+
+Step:  AIC=3937.01
+Price_Meter ~ Total_Floor + Build_Type + Build_Material + Build_Date + 
+    Build_Age + Total_Area + Unit_Room + Unit_Bath + Note + Rank_CityCenter + 
+    Rank_Market + Rank_Taipei + Rank_PopDensity
+
+                  Df Sum of Sq   RSS    AIC
+- Build_Age        1      0.19 15182 3935.0
+- Unit_Bath        1     10.56 15193 3936.3
+&lt;none&gt;                         15182 3937.0
+- Rank_Market      1     35.13 15217 3939.3
+- Rank_CityCenter  1     49.09 15231 3941.0
+- Total_Floor      1     52.66 15235 3941.4
+- Build_Date       1     55.22 15237 3941.7
+- Total_Area       1     88.69 15271 3945.8
+- Unit_Room        1    108.52 15291 3948.2
+- Rank_Taipei      1    234.93 15417 3963.4
+- Build_Material   5    322.63 15505 3965.9
+- Rank_PopDensity  1    299.19 15481 3971.1
+- Build_Type       4    452.39 15634 3983.3
+- Note             2   1281.12 16463 4082.8
+
+Step:  AIC=3935.04
+Price_Meter ~ Total_Floor + Build_Type + Build_Material + Build_Date + 
+    Total_Area + Unit_Room + Unit_Bath + Note + Rank_CityCenter + 
+    Rank_Market + Rank_Taipei + Rank_PopDensity
+
+                  Df Sum of Sq   RSS    AIC
+- Unit_Bath        1     10.61 15193 3934.3
+&lt;none&gt;                         15182 3935.0
+- Rank_Market      1     35.50 15218 3937.4
+- Rank_CityCenter  1     49.16 15231 3939.0
+- Total_Floor      1     52.86 15235 3939.5
+- Total_Area       1     88.81 15271 3943.8
+- Unit_Room        1    109.11 15291 3946.3
+- Rank_Taipei      1    234.92 15417 3961.4
+- Build_Date       1    242.08 15424 3962.3
+- Build_Material   5    323.11 15505 3964.0
+- Rank_PopDensity  1    301.09 15483 3969.3
+- Build_Type       4    456.72 15639 3981.8
+- Note             2   1296.21 16478 4082.5
+
+Step:  AIC=3934.33
+Price_Meter ~ Total_Floor + Build_Type + Build_Material + Build_Date + 
+    Total_Area + Unit_Room + Note + Rank_CityCenter + Rank_Market + 
+    Rank_Taipei + Rank_PopDensity
+
+                  Df Sum of Sq   RSS    AIC
+&lt;none&gt;                         15193 3934.3
+- Rank_Market      1     34.28 15227 3936.5
+- Rank_CityCenter  1     48.04 15241 3938.2
+- Total_Floor      1     51.54 15244 3938.6
+- Total_Area       1     78.69 15272 3941.9
+- Unit_Room        1    151.05 15344 3950.6
+- Build_Date       1    240.44 15433 3961.4
+- Rank_Taipei      1    241.38 15434 3961.5
+- Build_Material   5    321.86 15515 3963.1
+- Rank_PopDensity  1    294.81 15488 3967.9
+- Build_Type       4    460.69 15654 3981.6
+- Note             2   1287.82 16481 4080.8</code></pre>
+</div>
+<ul>
+<li>模型使用所有變數時, AIC = 3946.97</li>
+</ul>
+<p>在結果中可以看見每一個變數對AIC的改變, 再去挑選要移除的變數.</p>
+<p>可以看見Unit_Living, Rank_Train, interest_rate, Land_Area, Unit_Floor, Build_Age, Trade_Date, Unit_Bath等變數的AIC變化都在1以內, 這些變數很明顯的對Model並無太大的變化,因此可以直接移除掉.</p>
+<p>.<br />
+.<br />
+.</p>
+<p>依此類推</p>
+<p>最後的模型如下:</p>
+<ul>
+<li><p>Price_Meter ~ Total_Floor + Build_Type + Build_Material + Build_Date + Total_Area + Unit_Room + Note + Rank_CityCenter + Rank_Market + Rank_Taipei + Rank_PopDensity</p></li>
+<li><p>AIC = 3934.33</p></li>
+</ul>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/r/base/summary.html'>summary</a></span><span class='op'>(</span><span class='va'>backward.lm</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>
+Call:
+lm(formula = Price_Meter ~ Total_Floor + Build_Type + Build_Material + 
+    Build_Date + Total_Area + Unit_Room + Note + Rank_CityCenter + 
+    Rank_Market + Rank_Taipei + Rank_PopDensity, data = Btrain)
+
+Residuals:
+    Min      1Q  Median      3Q     Max 
+-9.3292 -1.9532 -0.2992  1.6581 19.3056 
+
+Coefficients:
+                                      Estimate Std. Error t value
+(Intercept)                          1.368e+01  1.068e+00  12.812
+Total_Floor                          7.454e-02  2.993e-02   2.491
+Build_TypeApartment under 11 floors  1.255e+00  2.878e-01   4.361
+Build_TypeHouse                      7.374e-01  4.278e-01   1.724
+Build_TypeStudio                     1.390e+00  3.423e-01   4.062
+Build_TypeWalk-Up Apartment         -3.711e-02  3.582e-01  -0.104
+Build_Material磚造                   1.803e-01  1.727e+00   0.104
+Build_Material見其他登記事項         1.464e+00  2.081e+00   0.704
+Build_Material鋼筋混凝土加強磚造    -5.657e-01  5.295e-01  -1.068
+Build_Material鋼筋混凝土造          -2.050e+00  4.755e-01  -4.312
+Build_Material鋼骨鋼筋混凝土造       1.895e+00  1.201e+00   1.578
+Build_Date                           3.818e-04  7.096e-05   5.380
+Total_Area                          -2.268e-02  7.367e-03  -3.078
+Unit_Room                            5.242e-01  1.229e-01   4.264
+Note6~15                             2.361e+00  3.986e-01   5.924
+Noteover 30                          1.468e+00  3.999e-01   3.672
+Rank_CityCenter                     -2.021e-01  8.402e-02  -2.405
+Rank_Market                         -1.488e-01  7.323e-02  -2.032
+Rank_Taipei                         -2.469e-01  4.581e-02  -5.391
+Rank_PopDensity                     -5.777e-01  9.697e-02  -5.957
+                                    Pr(&gt;|t|)    
+(Intercept)                          &lt; 2e-16 ***
+Total_Floor                         0.012833 *  
+Build_TypeApartment under 11 floors 1.37e-05 ***
+Build_TypeHouse                     0.084956 .  
+Build_TypeStudio                    5.07e-05 ***
+Build_TypeWalk-Up Apartment         0.917494    
+Build_Material磚造                  0.916906    
+Build_Material見其他登記事項        0.481780    
+Build_Material鋼筋混凝土加強磚造    0.285488    
+Build_Material鋼筋混凝土造          1.71e-05 ***
+Build_Material鋼骨鋼筋混凝土造      0.114810    
+Build_Date                          8.40e-08 ***
+Total_Area                          0.002116 ** 
+Unit_Room                           2.11e-05 ***
+Note6~15                            3.74e-09 ***
+Noteover 30                         0.000248 ***
+Rank_CityCenter                     0.016279 *  
+Rank_Market                         0.042349 *  
+Rank_Taipei                         7.93e-08 ***
+Rank_PopDensity                     3.07e-09 ***
+---
+Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
+
+Residual standard error: 2.882 on 1829 degrees of freedom
+Multiple R-squared:  0.4159,    Adjusted R-squared:  0.4099 
+F-statistic: 68.55 on 19 and 1829 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<p>最終的模型結果, Adj R-squared = 0.6546<br />
+由於Backward是用“剔除”的方式, 所以保留於模型的這些變數算是被留下來的重要變數.也可更進一步的留意每個變數的p-Value並推論這些變數是否對模型有切確的影響.</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># 此案例中，剛好跟 forward 結果一樣</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/step.html'>step</a></span><span class='op'>(</span><span class='va'>null</span>, scope <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>upper<span class='op'>=</span><span class='va'>full</span><span class='op'>)</span>, direction<span class='op'>=</span><span class='st'>"both"</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>Start:  AIC=4803.94
+Price_Meter ~ 1
+
+                  Df Sum of Sq   RSS    AIC
++ Note             2    8090.4 16731 4078.6
++ Build_Date       1    6642.3 18179 4230.1
++ Build_Age        1    6462.2 18359 4248.3
++ Build_Type       4    4036.8 20784 4483.8
++ Total_Area       1    2042.2 22779 4647.2
++ Rank_PopDensity  1    1004.0 23817 4729.6
++ Unit_Bath        1     855.1 23966 4741.1
++ Rank_CityCenter  1     603.9 24217 4760.4
++ Total_Floor      1     556.8 24264 4764.0
++ Build_Material   5     558.6 24262 4771.9
++ Trade_Date       1     293.0 24528 4784.0
++ Land_Area        1     280.3 24541 4784.9
++ Rank_Train       1     271.9 24549 4785.6
++ Unit_Floor       1     221.2 24600 4789.4
++ Rank_Taipei      1     211.8 24609 4790.1
++ Unit_Living      1     186.9 24634 4792.0
++ Unit_Room        1     107.0 24714 4798.0
++ Rank_Market      1      95.4 24726 4798.8
++ interest_rate    1      27.9 24793 4803.9
+&lt;none&gt;                         24821 4803.9
+
+Step:  AIC=4078.6
+Price_Meter ~ Note
+
+                  Df Sum of Sq   RSS    AIC
++ Rank_Taipei      1     953.3 15777 3972.1
++ Build_Type       4     529.9 16201 4027.1
++ Build_Date       1     204.5 16526 4057.9
++ Rank_PopDensity  1     182.9 16548 4060.3
++ Build_Age        1     149.3 16581 4064.0
++ Rank_Train       1     125.4 16605 4066.7
++ Total_Area       1      38.9 16692 4076.3
++ Rank_Market      1      37.6 16693 4076.4
++ Total_Floor      1      24.5 16706 4077.9
++ Trade_Date       1      22.0 16709 4078.2
++ Build_Material   5      92.8 16638 4078.3
++ Unit_Living      1      19.7 16711 4078.4
+&lt;none&gt;                         16731 4078.6
++ Unit_Floor       1       8.2 16722 4079.7
++ interest_rate    1       4.7 16726 4080.1
++ Rank_CityCenter  1       3.4 16727 4080.2
++ Land_Area        1       2.7 16728 4080.3
++ Unit_Room        1       1.6 16729 4080.4
++ Unit_Bath        1       0.7 16730 4080.5
+- Note             2    8090.4 24821 4803.9
+
+Step:  AIC=3972.13
+Price_Meter ~ Note + Rank_Taipei
+
+                  Df Sum of Sq   RSS    AIC
++ Build_Type       4     420.3 15357 3930.2
++ Rank_PopDensity  1     284.9 15492 3940.4
++ Build_Date       1     152.9 15624 3956.1
++ Rank_CityCenter  1     138.7 15639 3957.8
++ Rank_Market      1     116.3 15661 3960.4
++ Build_Age        1     104.6 15673 3961.8
++ Rank_Train       1      98.4 15679 3962.6
++ Total_Area       1      57.7 15720 3967.4
++ Total_Floor      1      37.5 15740 3969.7
++ Land_Area        1      33.3 15744 3970.2
++ Trade_Date       1      23.9 15754 3971.3
+&lt;none&gt;                         15777 3972.1
++ Unit_Living      1      16.6 15761 3972.2
++ Build_Material   5      82.6 15695 3972.4
++ interest_rate    1       6.8 15771 3973.3
++ Unit_Floor       1       6.1 15771 3973.4
++ Unit_Room        1       1.9 15775 3973.9
++ Unit_Bath        1       1.0 15776 3974.0
+- Rank_Taipei      1     953.3 16731 4078.6
+- Note             2    8831.9 24609 4790.1
+
+Step:  AIC=3930.2
+Price_Meter ~ Note + Rank_Taipei + Build_Type
+
+                  Df Sum of Sq   RSS    AIC
++ Rank_PopDensity  1     379.6 14977 3885.9
++ Rank_CityCenter  1     204.3 15153 3907.4
++ Rank_Market      1     192.9 15164 3908.8
++ Rank_Train       1     135.1 15222 3915.9
++ Build_Date       1     125.2 15232 3917.1
++ Build_Age        1      86.4 15271 3921.8
++ Unit_Room        1      61.9 15295 3924.7
++ Build_Material   5      86.8 15270 3929.7
++ Unit_Bath        1      20.3 15337 3929.8
++ Total_Area       1      19.0 15338 3929.9
+&lt;none&gt;                         15357 3930.2
++ Trade_Date       1      15.6 15341 3930.3
++ Land_Area        1       8.6 15348 3931.2
++ interest_rate    1       6.9 15350 3931.4
++ Total_Floor      1       6.4 15351 3931.4
++ Unit_Floor       1       0.9 15356 3932.1
++ Unit_Living      1       0.7 15356 3932.1
+- Build_Type       4     420.3 15777 3972.1
+- Rank_Taipei      1     843.7 16201 4027.1
+- Note             2    5058.5 20416 4452.7
+
+Step:  AIC=3885.92
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity
+
+                  Df Sum of Sq   RSS    AIC
++ Build_Date       1      86.5 14891 3877.2
++ Build_Age        1      63.1 14914 3880.1
++ Unit_Room        1      56.5 14921 3880.9
++ Build_Material   5     118.6 14859 3881.2
++ Rank_CityCenter  1      39.4 14938 3883.1
++ Unit_Bath        1      34.9 14942 3883.6
++ Total_Area       1      27.9 14950 3884.5
++ Total_Floor      1      26.8 14951 3884.6
++ Land_Area        1      26.0 14951 3884.7
+&lt;none&gt;                         14977 3885.9
++ Rank_Market      1      14.4 14963 3886.2
++ Trade_Date       1       6.4 14971 3887.1
++ Rank_Train       1       2.8 14975 3887.6
++ interest_rate    1       2.3 14975 3887.6
++ Unit_Floor       1       0.1 14977 3887.9
++ Unit_Living      1       0.0 14977 3887.9
+- Rank_PopDensity  1     379.6 15357 3930.2
+- Build_Type       4     515.0 15492 3940.4
+- Rank_Taipei      1     935.9 15913 3996.0
+- Note             2    4380.8 19358 4356.3
+
+Step:  AIC=3877.21
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date
+
+                  Df Sum of Sq   RSS    AIC
++ Build_Material   5    238.21 14653 3857.4
++ Unit_Room        1     51.56 14839 3872.8
++ Total_Area       1     49.89 14841 3873.0
++ Rank_CityCenter  1     47.96 14843 3873.2
++ Land_Area        1     38.77 14852 3874.4
++ Unit_Bath        1     29.59 14861 3875.5
+&lt;none&gt;                         14891 3877.2
++ Total_Floor      1     15.54 14875 3877.3
++ Rank_Market      1     10.91 14880 3877.9
++ Rank_Train       1      6.83 14884 3878.4
++ Build_Age        1      2.19 14889 3878.9
++ Trade_Date       1      1.18 14890 3879.1
++ interest_rate    1      0.13 14891 3879.2
++ Unit_Floor       1      0.07 14891 3879.2
++ Unit_Living      1      0.04 14891 3879.2
+- Build_Date       1     86.51 14977 3885.9
+- Rank_PopDensity  1    340.89 15232 3917.1
+- Build_Type       4    486.11 15377 3928.6
+- Rank_Taipei      1    862.04 15753 3979.3
+- Note             2   1801.01 16692 4084.3
+
+Step:  AIC=3857.4
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date + Build_Material
+
+                  Df Sum of Sq   RSS    AIC
++ Unit_Room        1     79.80 14573 3849.3
++ Unit_Bath        1     47.04 14606 3853.5
++ Rank_CityCenter  1     43.67 14609 3853.9
++ Total_Area       1     26.90 14626 3856.0
++ Land_Area        1     26.33 14626 3856.1
+&lt;none&gt;                         14653 3857.4
++ Total_Floor      1     15.68 14637 3857.4
++ Rank_Market      1     12.78 14640 3857.8
++ Rank_Train       1      7.32 14645 3858.5
++ Build_Age        1      1.12 14652 3859.3
++ Trade_Date       1      0.47 14652 3859.3
++ interest_rate    1      0.03 14653 3859.4
++ Unit_Living      1      0.00 14653 3859.4
++ Unit_Floor       1      0.00 14653 3859.4
+- Build_Material   5    238.21 14891 3877.2
+- Build_Date       1    206.15 14859 3881.2
+- Build_Type       4    424.99 15078 3902.3
+- Rank_PopDensity  1    393.55 15046 3904.4
+- Rank_Taipei      1    827.49 15480 3957.0
+- Note             2   1245.48 15898 4004.2
+
+Step:  AIC=3849.3
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date + Build_Material + Unit_Room
+
+                  Df Sum of Sq   RSS    AIC
++ Total_Area       1     99.24 14474 3838.7
++ Land_Area        1     52.52 14520 3844.6
++ Rank_CityCenter  1     40.35 14533 3846.2
++ Total_Floor      1     18.46 14554 3849.0
+&lt;none&gt;                         14573 3849.3
++ Rank_Market      1      9.75 14563 3850.1
++ Unit_Bath        1      8.68 14564 3850.2
++ Rank_Train       1      6.33 14567 3850.5
++ Unit_Living      1      3.60 14569 3850.8
++ Build_Age        1      0.50 14572 3851.2
++ interest_rate    1      0.39 14572 3851.2
++ Trade_Date       1      0.14 14573 3851.3
++ Unit_Floor       1      0.01 14573 3851.3
+- Unit_Room        1     79.80 14653 3857.4
+- Build_Material   5    266.45 14839 3872.8
+- Build_Date       1    218.28 14791 3874.8
+- Rank_PopDensity  1    393.35 14966 3896.5
+- Build_Type       4    503.57 15076 3904.1
+- Rank_Taipei      1    826.10 15399 3949.2
+- Note             2   1269.18 15842 3999.7
+
+Step:  AIC=3838.66
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date + Build_Material + Unit_Room + Total_Area
+
+                  Df Sum of Sq   RSS    AIC
++ Rank_CityCenter  1     35.60 14438 3836.1
++ Unit_Bath        1     33.28 14440 3836.4
++ Total_Floor      1     27.77 14446 3837.1
++ Rank_Market      1     18.80 14455 3838.3
+&lt;none&gt;                         14474 3838.7
++ Rank_Train       1     14.68 14459 3838.8
++ Land_Area        1     11.34 14462 3839.2
++ interest_rate    1      0.48 14473 3840.6
++ Build_Age        1      0.46 14473 3840.6
++ Unit_Living      1      0.14 14474 3840.6
++ Trade_Date       1      0.09 14474 3840.7
++ Unit_Floor       1      0.00 14474 3840.7
+- Total_Area       1     99.24 14573 3849.3
+- Unit_Room        1    152.14 14626 3856.0
+- Build_Material   5    234.59 14708 3858.4
+- Build_Date       1    237.52 14711 3866.8
+- Rank_PopDensity  1    397.52 14871 3886.8
+- Build_Type       4    491.00 14965 3892.3
+- Rank_Taipei      1    834.12 15308 3940.3
+- Note             2   1327.14 15801 3996.9
+
+Step:  AIC=3836.11
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date + Build_Material + Unit_Room + Total_Area + Rank_CityCenter
+
+                  Df Sum of Sq   RSS    AIC
++ Total_Floor      1     36.78 14401 3833.4
++ Unit_Bath        1     34.90 14403 3833.6
++ Rank_Market      1     18.86 14419 3835.7
+&lt;none&gt;                         14438 3836.1
++ Land_Area        1     10.89 14427 3836.7
++ Rank_Train       1     10.56 14428 3836.8
++ interest_rate    1      0.51 14438 3838.0
++ Build_Age        1      0.43 14438 3838.1
++ Unit_Floor       1      0.17 14438 3838.1
++ Trade_Date       1      0.08 14438 3838.1
++ Unit_Living      1      0.01 14438 3838.1
+- Rank_CityCenter  1     35.60 14474 3838.7
+- Total_Area       1     94.49 14533 3846.2
+- Unit_Room        1    145.61 14584 3852.7
+- Build_Material   5    230.35 14668 3855.4
+- Rank_PopDensity  1    214.82 14653 3861.4
+- Build_Date       1    245.20 14683 3865.2
+- Build_Type       4    468.10 14906 3887.1
+- Rank_Taipei      1    569.98 15008 3905.7
+- Note             2   1312.72 15751 3993.0
+
+Step:  AIC=3833.39
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date + Build_Material + Unit_Room + Total_Area + Rank_CityCenter + 
+    Total_Floor
+
+                  Df Sum of Sq   RSS    AIC
++ Unit_Bath        1     38.22 14363 3830.5
++ Rank_Market      1     15.80 14386 3833.4
+&lt;none&gt;                         14401 3833.4
++ Rank_Train       1     10.27 14391 3834.1
++ Unit_Floor       1      6.82 14394 3834.5
++ Land_Area        1      5.40 14396 3834.7
++ interest_rate    1      0.65 14401 3835.3
++ Build_Age        1      0.14 14401 3835.4
++ Unit_Living      1      0.01 14401 3835.4
++ Trade_Date       1      0.00 14401 3835.4
+- Total_Floor      1     36.78 14438 3836.1
+- Rank_CityCenter  1     44.61 14446 3837.1
+- Total_Area       1    104.70 14506 3844.8
+- Unit_Room        1    155.27 14557 3851.2
+- Build_Material   5    229.11 14630 3852.6
+- Build_Date       1    223.51 14625 3859.9
+- Rank_PopDensity  1    240.48 14642 3862.0
+- Build_Type       4    479.88 14881 3886.0
+- Rank_Taipei      1    529.30 14931 3898.1
+- Note             2   1346.52 15748 3994.7
+
+Step:  AIC=3830.48
+Price_Meter ~ Note + Rank_Taipei + Build_Type + Rank_PopDensity + 
+    Build_Date + Build_Material + Unit_Room + Total_Area + Rank_CityCenter + 
+    Total_Floor + Unit_Bath
+
+                  Df Sum of Sq   RSS    AIC
+&lt;none&gt;                         14363 3830.5
++ Rank_Market      1     15.40 14348 3830.5
++ Rank_Train       1     13.74 14349 3830.7
++ Unit_Floor       1      6.88 14356 3831.6
++ Land_Area        1      6.48 14357 3831.6
++ Unit_Living      1      0.50 14363 3832.4
++ interest_rate    1      0.46 14363 3832.4
++ Build_Age        1      0.18 14363 3832.5
++ Trade_Date       1      0.00 14363 3832.5
+- Unit_Bath        1     38.22 14401 3833.4
+- Total_Floor      1     40.11 14403 3833.6
+- Rank_CityCenter  1     46.95 14410 3834.5
+- Unit_Room        1     87.57 14451 3839.7
+- Total_Area       1    132.35 14495 3845.4
+- Build_Material   5    232.18 14595 3850.1
+- Build_Date       1    225.22 14588 3857.2
+- Rank_PopDensity  1    254.07 14617 3860.9
+- Build_Type       4    466.93 14830 3881.6
+- Rank_Taipei      1    518.70 14882 3894.1
+- Note             2   1381.54 15745 3996.3</code></pre>
+<pre><code>
+Call:
+lm(formula = Price_Meter ~ Note + Rank_Taipei + Build_Type + 
+    Rank_PopDensity + Build_Date + Build_Material + Unit_Room + 
+    Total_Area + Rank_CityCenter + Total_Floor + Unit_Bath, data = train)
+
+Coefficients:
+                        (Intercept)  
+                         12.3604785  
+                           Note6~15  
+                          2.4136150  
+                        Noteover 30  
+                          1.5850424  
+                        Rank_Taipei  
+                         -0.2864218  
+Build_TypeApartment under 11 floors  
+                          1.2192744  
+                    Build_TypeHouse  
+                          0.5959220  
+                   Build_TypeStudio  
+                          1.3451198  
+        Build_TypeWalk-Up Apartment  
+                         -0.1449322  
+                    Rank_PopDensity  
+                         -0.4444337  
+                         Build_Date  
+                          0.0003832  
+                 Build_Material磚造  
+                         -2.4629584  
+       Build_Material見其他登記事項  
+                          1.6240605  
+   Build_Material鋼筋混凝土加強磚造  
+                         -0.2565101  
+         Build_Material鋼筋混凝土造  
+                         -1.6218883  
+     Build_Material鋼骨鋼筋混凝土造  
+                          2.1277710  
+                          Unit_Room  
+                          0.4276165  
+                         Total_Area  
+                         -0.0302465  
+                    Rank_CityCenter  
+                         -0.1993218  
+                        Total_Floor  
+                          0.0646624  
+                          Unit_Bath  
+                          0.3169860  </code></pre>
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='co'># 此案例中，剛好跟 backward 結果一樣</span>
+<span class='fu'><a href='https://rdrr.io/r/stats/step.html'>step</a></span><span class='op'>(</span><span class='va'>full</span>, scope <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/list.html'>list</a></span><span class='op'>(</span>upper<span class='op'>=</span><span class='va'>full</span><span class='op'>)</span>, direction<span class='op'>=</span><span class='st'>"both"</span><span class='op'>)</span>  
+</code></pre>
+</div>
+<pre><code>Start:  AIC=3841.84
+Price_Meter ~ Land_Area + Trade_Date + Unit_Floor + Total_Floor + 
+    Build_Type + Build_Material + Build_Date + Build_Age + Total_Area + 
+    Unit_Room + Unit_Living + Unit_Bath + Note + Rank_CityCenter + 
+    Rank_Market + Rank_Taipei + Rank_Train + Rank_PopDensity + 
+    interest_rate
+
+                  Df Sum of Sq   RSS    AIC
+- Unit_Living      1      0.74 14328 3839.9
+- Trade_Date       1      1.06 14328 3840.0
+- interest_rate    1      1.77 14329 3840.1
+- Build_Age        1      2.35 14329 3840.1
+- Rank_Train       1      3.61 14331 3840.3
+- Rank_Market      1      4.80 14332 3840.5
+- Land_Area        1      5.96 14333 3840.6
+- Unit_Floor       1      6.22 14333 3840.6
+- Build_Date       1     11.31 14338 3841.3
+&lt;none&gt;                         14327 3841.8
+- Total_Floor      1     37.05 14364 3844.6
+- Rank_CityCenter  1     41.16 14368 3845.1
+- Unit_Bath        1     41.26 14368 3845.2
+- Unit_Room        1     90.42 14418 3851.5
+- Total_Area       1     96.96 14424 3852.3
+- Rank_PopDensity  1    126.09 14453 3856.0
+- Build_Material   5    231.50 14559 3861.5
+- Rank_Taipei      1    243.24 14570 3871.0
+- Build_Type       4    450.72 14778 3891.1
+- Note             2   1354.46 15682 4004.9
+
+Step:  AIC=3839.93
+Price_Meter ~ Land_Area + Trade_Date + Unit_Floor + Total_Floor + 
+    Build_Type + Build_Material + Build_Date + Build_Age + Total_Area + 
+    Unit_Room + Unit_Bath + Note + Rank_CityCenter + Rank_Market + 
+    Rank_Taipei + Rank_Train + Rank_PopDensity + interest_rate
+
+                  Df Sum of Sq   RSS    AIC
+- Trade_Date       1      1.14 14329 3838.1
+- interest_rate    1      1.82 14330 3838.2
+- Build_Age        1      2.46 14330 3838.3
+- Rank_Train       1      3.49 14331 3838.4
+- Rank_Market      1      4.66 14332 3838.5
+- Land_Area        1      6.00 14334 3838.7
+- Unit_Floor       1      6.40 14334 3838.8
+- Build_Date       1     11.58 14339 3839.4
+&lt;none&gt;                         14328 3839.9
++ Unit_Living      1      0.74 14327 3841.8
+- Total_Floor      1     37.52 14365 3842.8
+- Unit_Bath        1     40.52 14368 3843.2
+- Rank_CityCenter  1     41.86 14370 3843.3
+- Unit_Room        1     89.74 14418 3849.5
+- Total_Area       1     99.35 14427 3850.7
+- Rank_PopDensity  1    126.17 14454 3854.1
+- Build_Material   5    230.87 14559 3859.5
+- Rank_Taipei      1    244.16 14572 3869.2
+- Build_Type       4    462.97 14791 3890.7
+- Note             2   1361.98 15690 4003.8
+
+Step:  AIC=3838.08
+Price_Meter ~ Land_Area + Unit_Floor + Total_Floor + Build_Type + 
+    Build_Material + Build_Date + Build_Age + Total_Area + Unit_Room + 
+    Unit_Bath + Note + Rank_CityCenter + Rank_Market + Rank_Taipei + 
+    Rank_Train + Rank_PopDensity + interest_rate
+
+                  Df Sum of Sq   RSS    AIC
+- Build_Age        1      2.42 14331 3836.4
+- interest_rate    1      3.03 14332 3836.5
+- Rank_Train       1      3.50 14332 3836.5
+- Rank_Market      1      4.57 14334 3836.7
+- Land_Area        1      5.93 14335 3836.8
+- Unit_Floor       1      6.52 14336 3836.9
+&lt;none&gt;                         14329 3838.1
++ Trade_Date       1      1.14 14328 3839.9
++ Unit_Living      1      0.81 14328 3840.0
+- Total_Floor      1     37.67 14367 3840.9
+- Build_Date       1     39.87 14369 3841.2
+- Unit_Bath        1     40.46 14369 3841.3
+- Rank_CityCenter  1     41.86 14371 3841.5
+- Unit_Room        1     90.08 14419 3847.7
+- Total_Area       1     99.06 14428 3848.8
+- Rank_PopDensity  1    125.74 14455 3852.2
+- Build_Material   5    231.14 14560 3857.7
+- Rank_Taipei      1    244.81 14574 3867.4
+- Build_Type       4    461.84 14791 3888.7
+- Note             2   1362.10 15691 4002.0
+
+Step:  AIC=3836.39
+Price_Meter ~ Land_Area + Unit_Floor + Total_Floor + Build_Type + 
+    Build_Material + Build_Date + Total_Area + Unit_Room + Unit_Bath + 
+    Note + Rank_CityCenter + Rank_Market + Rank_Taipei + Rank_Train + 
+    Rank_PopDensity + interest_rate
+
+                  Df Sum of Sq   RSS    AIC
+- interest_rate    1      0.76 14332 3834.5
+- Rank_Train       1      3.32 14335 3834.8
+- Rank_Market      1      4.70 14336 3835.0
+- Land_Area        1      5.71 14337 3835.1
+- Unit_Floor       1      6.48 14338 3835.2
+&lt;none&gt;                         14331 3836.4
++ Build_Age        1      2.42 14329 3838.1
++ Trade_Date       1      1.09 14330 3838.3
++ Unit_Living      1      0.85 14330 3838.3
+- Total_Floor      1     38.71 14370 3839.4
+- Unit_Bath        1     40.58 14372 3839.6
+- Rank_CityCenter  1     42.13 14374 3839.8
+- Unit_Room        1     90.09 14421 3846.0
+- Total_Area       1     99.47 14431 3847.2
+- Rank_PopDensity  1    127.16 14458 3850.7
+- Build_Material   5    231.31 14563 3856.0
+- Build_Date       1    224.81 14556 3863.2
+- Rank_Taipei      1    243.86 14575 3865.6
+- Build_Type       4    466.91 14798 3887.7
+- Note             2   1386.67 15718 4003.2
+
+Step:  AIC=3834.49
+Price_Meter ~ Land_Area + Unit_Floor + Total_Floor + Build_Type + 
+    Build_Material + Build_Date + Total_Area + Unit_Room + Unit_Bath + 
+    Note + Rank_CityCenter + Rank_Market + Rank_Taipei + Rank_Train + 
+    Rank_PopDensity
+
+                  Df Sum of Sq   RSS    AIC
+- Rank_Train       1      3.27 14335 3832.9
+- Rank_Market      1      4.56 14337 3833.1
+- Land_Area        1      5.59 14338 3833.2
+- Unit_Floor       1      6.73 14339 3833.4
+&lt;none&gt;                         14332 3834.5
++ Unit_Living      1      0.91 14331 3836.4
++ interest_rate    1      0.76 14331 3836.4
++ Build_Age        1      0.14 14332 3836.5
++ Trade_Date       1      0.00 14332 3836.5
+- Total_Floor      1     38.92 14371 3837.5
+- Unit_Bath        1     40.80 14373 3837.7
+- Rank_CityCenter  1     42.11 14374 3837.9
+- Unit_Room        1     89.48 14422 3844.0
+- Total_Area       1     99.54 14432 3845.3
+- Rank_PopDensity  1    126.63 14459 3848.8
+- Build_Material   5    230.62 14563 3854.0
+- Build_Date       1    224.99 14557 3861.3
+- Rank_Taipei      1    245.53 14578 3863.9
+- Build_Type       4    466.58 14799 3885.7
+- Note             2   1386.91 15719 4001.3
+
+Step:  AIC=3832.91
+Price_Meter ~ Land_Area + Unit_Floor + Total_Floor + Build_Type + 
+    Build_Material + Build_Date + Total_Area + Unit_Room + Unit_Bath + 
+    Note + Rank_CityCenter + Rank_Market + Rank_Taipei + Rank_PopDensity
+
+                  Df Sum of Sq   RSS    AIC
+- Land_Area        1      5.82 14341 3831.7
+- Unit_Floor       1      6.63 14342 3831.8
+- Rank_Market      1     14.20 14350 3832.7
+&lt;none&gt;                         14335 3832.9
++ Rank_Train       1      3.27 14332 3834.5
++ Unit_Living      1      0.77 14335 3834.8
++ interest_rate    1      0.71 14335 3834.8
++ Build_Age        1      0.13 14335 3834.9
++ Trade_Date       1      0.00 14335 3834.9
+- Total_Floor      1     38.06 14373 3835.8
+- Unit_Bath        1     38.92 14374 3835.9
+- Rank_CityCenter  1     45.38 14381 3836.8
+- Unit_Room        1     89.20 14425 3842.4
+- Total_Area       1     96.81 14432 3843.4
+- Build_Material   5    230.88 14566 3852.5
+- Build_Date       1    221.74 14557 3859.3
+- Rank_PopDensity  1    235.82 14571 3861.1
+- Rank_Taipei      1    251.57 14587 3863.1
+- Build_Type       4    463.44 14799 3883.7
+- Note             2   1397.73 15733 4000.9
+
+Step:  AIC=3831.66
+Price_Meter ~ Unit_Floor + Total_Floor + Build_Type + Build_Material + 
+    Build_Date + Total_Area + Unit_Room + Unit_Bath + Note + 
+    Rank_CityCenter + Rank_Market + Rank_Taipei + Rank_PopDensity
+
+                  Df Sum of Sq   RSS    AIC
+- Unit_Floor       1      6.49 14348 3830.5
+- Rank_Market      1     15.00 14356 3831.6
+&lt;none&gt;                         14341 3831.7
++ Land_Area        1      5.82 14335 3832.9
++ Rank_Train       1      3.49 14338 3833.2
++ Unit_Living      1      0.81 14340 3833.6
++ interest_rate    1      0.60 14341 3833.6
++ Build_Age        1      0.13 14341 3833.6
++ Trade_Date       1      0.00 14341 3833.7
+- Unit_Bath        1     37.89 14379 3834.5
+- Total_Floor      1     43.19 14384 3835.2
+- Rank_CityCenter  1     46.44 14388 3835.6
+- Unit_Room        1     89.25 14430 3841.1
+- Total_Area       1    142.32 14484 3847.9
+- Build_Material   5    231.67 14573 3851.3
+- Build_Date       1    220.36 14562 3857.9
+- Rank_PopDensity  1    237.37 14579 3860.0
+- Rank_Taipei      1    246.12 14587 3861.1
+- Build_Type       4    457.62 14799 3881.7
+- Note             2   1392.43 15734 3999.0
+
+Step:  AIC=3830.5
+Price_Meter ~ Total_Floor + Build_Type + Build_Material + Build_Date + 
+    Total_Area + Unit_Room + Unit_Bath + Note + Rank_CityCenter + 
+    Rank_Market + Rank_Taipei + Rank_PopDensity
+
+                  Df Sum of Sq   RSS    AIC
+- Rank_Market      1     15.40 14363 3830.5
+&lt;none&gt;                         14348 3830.5
++ Unit_Floor       1      6.49 14341 3831.7
++ Land_Area        1      5.68 14342 3831.8
++ Rank_Train       1      3.38 14344 3832.1
++ Unit_Living      1      1.02 14347 3832.4
++ interest_rate    1      0.82 14347 3832.4
++ Build_Age        1      0.06 14348 3832.5
++ Trade_Date       1      0.02 14348 3832.5
+- Total_Floor      1     36.93 14385 3833.2
+- Unit_Bath        1     37.82 14386 3833.4
+- Rank_CityCenter  1     46.58 14394 3834.5
+- Unit_Room        1     87.81 14436 3839.8
+- Total_Area       1    140.59 14488 3846.5
+- Build_Material   5    232.88 14581 3850.3
+- Build_Date       1    220.89 14569 3856.7
+- Rank_PopDensity  1    238.64 14586 3859.0
+- Rank_Taipei      1    243.44 14591 3859.6
+- Build_Type       4    453.92 14802 3880.1
+- Note             2   1389.28 15737 3997.4
+
+Step:  AIC=3830.48
+Price_Meter ~ Total_Floor + Build_Type + Build_Material + Build_Date + 
+    Total_Area + Unit_Room + Unit_Bath + Note + Rank_CityCenter + 
+    Rank_Taipei + Rank_PopDensity
+
+                  Df Sum of Sq   RSS    AIC
+&lt;none&gt;                         14363 3830.5
++ Rank_Market      1     15.40 14348 3830.5
++ Rank_Train       1     13.74 14349 3830.7
++ Unit_Floor       1      6.88 14356 3831.6
++ Land_Area        1      6.48 14357 3831.6
++ Unit_Living      1      0.50 14363 3832.4
++ interest_rate    1      0.46 14363 3832.4
++ Build_Age        1      0.18 14363 3832.5
++ Trade_Date       1      0.00 14363 3832.5
+- Unit_Bath        1     38.22 14401 3833.4
+- Total_Floor      1     40.11 14403 3833.6
+- Rank_CityCenter  1     46.95 14410 3834.5
+- Unit_Room        1     87.57 14451 3839.7
+- Total_Area       1    132.35 14495 3845.4
+- Build_Material   5    232.18 14595 3850.1
+- Build_Date       1    225.22 14588 3857.2
+- Rank_PopDensity  1    254.07 14617 3860.9
+- Build_Type       4    466.93 14830 3881.6
+- Rank_Taipei      1    518.70 14882 3894.1
+- Note             2   1381.54 15745 3996.3</code></pre>
+<pre><code>
+Call:
+lm(formula = Price_Meter ~ Total_Floor + Build_Type + Build_Material + 
+    Build_Date + Total_Area + Unit_Room + Unit_Bath + Note + 
+    Rank_CityCenter + Rank_Taipei + Rank_PopDensity, data = train)
+
+Coefficients:
+                        (Intercept)  
+                         12.3604785  
+                        Total_Floor  
+                          0.0646624  
+Build_TypeApartment under 11 floors  
+                          1.2192744  
+                    Build_TypeHouse  
+                          0.5959220  
+                   Build_TypeStudio  
+                          1.3451198  
+        Build_TypeWalk-Up Apartment  
+                         -0.1449322  
+                 Build_Material磚造  
+                         -2.4629584  
+       Build_Material見其他登記事項  
+                          1.6240605  
+   Build_Material鋼筋混凝土加強磚造  
+                         -0.2565101  
+         Build_Material鋼筋混凝土造  
+                         -1.6218883  
+     Build_Material鋼骨鋼筋混凝土造  
+                          2.1277710  
+                         Build_Date  
+                          0.0003832  
+                         Total_Area  
+                         -0.0302465  
+                          Unit_Room  
+                          0.4276165  
+                          Unit_Bath  
+                          0.3169860  
+                           Note6~15  
+                          2.4136150  
+                        Noteover 30  
+                          1.5850424  
+                    Rank_CityCenter  
+                         -0.1993218  
+                        Rank_Taipei  
+                         -0.2864218  
+                    Rank_PopDensity  
+                         -0.4444337  </code></pre>
+</div>
+<h1 id="預測">預測</h1>
+<p>在建構模型的過程中,我們已達成變數挑選的目的,從變數的p-value及係數做推論,而建構完模型之後往往要面對的議題就是預測. 在最一開始我們將資料分為test和train就是為了要預測模型的準確度.</p>
+<p>由於用step()回傳的模型型態和lm()是一樣的,所以可以直接用線性回歸的預測方法.</p>
+<p>self-defined 的 R-squared 函式</p>
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>R_squared</span> <span class='op'>&lt;-</span> <span class='kw'>function</span><span class='op'>(</span><span class='va'>actual</span>, <span class='va'>predict</span><span class='op'>)</span><span class='op'>{</span>
+  <span class='va'>mean_of_obs</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/mean.html'>mean</a></span><span class='op'>(</span><span class='va'>actual</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>actual</span><span class='op'>)</span><span class='op'>)</span>
+    <span class='va'>SS_tot</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>actual</span> <span class='op'>-</span> <span class='va'>mean_of_obs</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span>
+  <span class='va'>SS_reg</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sum.html'>sum</a></span><span class='op'>(</span><span class='op'>(</span><span class='va'>predict</span> <span class='op'>-</span> <span class='va'>mean_of_obs</span><span class='op'>)</span><span class='op'>^</span><span class='fl'>2</span><span class='op'>)</span>
+  <span class='co'>#SS_res &lt;- sum((actual - predict)^2)</span>
+  <span class='va'>R_squared</span> <span class='op'>&lt;-</span> <span class='va'>SS_reg</span><span class='op'>/</span><span class='va'>SS_tot</span>   <span class='co'>#1 - (SS_res/SS_tot)</span>
+  <span class='va'>R_squared</span>
+<span class='op'>}</span>
+</code></pre>
+</div>
+</div>
+直接用predict()來預測<br />
+並衡量lm,forward,backward的預測結果.
+<div class="layout-chunk" data-layout="l-body">
+<div class="sourceCode">
+<pre class="sourceCode r"><code class="sourceCode r"><span class='va'>forward.test1</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>forward.lm</span>, <span class='va'>test</span><span class='op'>)</span>
+<span class='va'>backward.test1</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>backward.lm</span>, <span class='va'>Btest</span><span class='op'>)</span>
+<span class='va'>lm.test</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/predict.html'>predict</a></span><span class='op'>(</span><span class='va'>full</span>,<span class='va'>test</span><span class='op'>)</span>
+
+
+<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fu'>R_squared</span><span class='op'>(</span><span class='va'>test</span><span class='op'>$</span><span class='va'>Price_Meter</span>, <span class='va'>forward.test1</span><span class='op'>)</span>,
+  <span class='fu'>R_squared</span><span class='op'>(</span><span class='va'>Btest</span><span class='op'>$</span><span class='va'>Price_Meter</span>, <span class='va'>backward.test1</span><span class='op'>)</span>, 
+  <span class='fu'>R_squared</span><span class='op'>(</span><span class='va'>test</span><span class='op'>$</span><span class='va'>Price_Meter</span>, <span class='va'>lm.test</span><span class='op'>)</span><span class='op'>)</span>
+</code></pre>
+</div>
+<pre><code>[1] 0.3813950 0.4111492 0.3827530</code></pre>
+</div>
+<p>可以看見, Backward無論在train 或 test的效果都比較好.<br />
+代表在此房屋交易資料中, 對於每坪房價的預測,利用Backward的方式保留重要變數比挑選變數更能呈現出資料的線性型態.</p>
+<h1 id="結果討論">結果討論</h1>
+<p>以上是將Data分成Train &amp; Test來進行, 主要是”預測“的考量. 若今天是要探討”變數的重要性" 或 “解釋x和y的關係”, 還是會傾向將全部變數放進線性回歸來建立模型.</p>
+<p>而關於p-value，統計中 0.05 ~ 0.1稱之為marginal significance，雖然本文是拿 0.05 當作一個基準，不過事實上有某些學者認為這樣的變數還是具有一定的顯著性，因此在變數挑選的過程中，還是要根據實務狀況來訂下一個基準。</p>
+<p>在判斷「重要變數」時，往往也得跟實務上的「領域知識」做結合。</p>
+<p>使用 Stepwise Regression 挑選出來的重要變數，其實只是在「統計上」具有意義，並不代表「實際上」是有意義的，只能說有這個可能性而已。</p>
+<p>所謂的資料，其實都只是「樣本」，並非「母體」。</p>
+<p>因此，當今天判斷出某個變數並不顯著(重要)時，有可能只是因為我們所蒐集的資料不足，所以無法在統計上顯現出這些變數的重要性。</p>
+<p>又或者，資料本身並不適合用線性模型來模擬，反而用非線性的模型比較好(e.g., 決策樹、SVM)。</p>
+<p>有很多因素都會影響最後資料分析提供的結果，因此需要多方比較，並佐以實務面上的知識，才能做出最後定論。</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
+<!--radix_placeholder_article_footer-->
+<!--/radix_placeholder_article_footer-->
+</div>
+
+<div class="d-appendix">
+</div>
+
+
+<!--radix_placeholder_site_after_body-->
+<!--/radix_placeholder_site_after_body-->
+<!--radix_placeholder_appendices-->
+<div class="appendix-bottom"></div>
+<!--/radix_placeholder_appendices-->
+<!--radix_placeholder_navigation_after_body-->
+<!--/radix_placeholder_navigation_after_body-->
+
+</body>
+
+</html>
