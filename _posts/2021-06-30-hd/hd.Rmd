@@ -11,7 +11,6 @@ output:
 
 
 ```{r setup, message = FALSE, include = FALSE}
-
 library(dplyr)
 library(readr)
 library(tidyverse)
@@ -21,10 +20,11 @@ library(DT)
 library(car)
 library(broom)
 
-Data <- read_csv("Data/KeelungENG.csv")
-DataS <- read_csv("Data/DataS.csv")
-DataPS <- read_csv("Data/DataPS.csv")
-Presold <- read_csv("Data/Presold.csv")
+Data <- read_csv("~/Desktop/SP_hhungwen/Data/KeelungENG.csv")
+DataS <- read_csv("~/Desktop/SP_hhungwen/Data/DataS.csv")
+DataPS <- read_csv("~/Desktop/SP_hhungwen/Data/DataPS.csv")
+Presold <- read_csv("~/Desktop/SP_hhungwen/Data/Presold.csv")
+
 ```
 
 *線性迴歸*，是概率統計學裏最重要的統計方法，也是機器學習中一類非常重要的算法。線性模型簡單理解非常容易，但是內涵是非常深奧的。尤其是線性迴歸模型中的Diagnostics plot的閱讀與理解一直被認爲是線性迴歸中的一個難點。  
@@ -80,7 +80,11 @@ Leverage就是槓桿的意思。這種圖的意義在於檢查數據分析項目
 需注意，即使R將這些特殊的點標記了出來，也不等於他們一定需要被刪除。還是要參考Cook距離的絕對大小。  
 
 
+
+
 在第四張圖中可以看見最右邊有一個點離左邊的點們都非常遠.  我們必須找出此極端點並刪除他.  
+
+
 ```{r}
 high_lev<-  plm4 %>%
   augment() %>%

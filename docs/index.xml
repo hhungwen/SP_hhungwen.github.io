@@ -7,7 +7,16 @@
     <description>Senior Project Blog
 </description>
     <generator>Distill</generator>
-    <lastBuildDate>Tue, 22 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 30 Jun 2021 00:00:00 +0000</lastBuildDate>
+    <item>
+      <title>Residuals Leverage</title>
+      <dc:creator>Hui-Chia HungWen</dc:creator>
+      <link>https://hhungwen.github.io/SP_hhungwen.github.io/posts/2021-06-30-hd</link>
+      <description>Residuals Leverage</description>
+      <guid>https://hhungwen.github.io/SP_hhungwen.github.io/posts/2021-06-30-hd</guid>
+      <pubDate>Wed, 30 Jun 2021 00:00:00 +0000</pubDate>
+      <media:content url="https://hhungwen.github.io/SP_hhungwen.github.io/posts/2021-06-30-hd/hd_files/figure-html5/unnamed-chunk-1-1.png" medium="image" type="image/png" width="1248" height="768"/>
+    </item>
     <item>
       <title>Subset the Model</title>
       <dc:creator>Hui-Chia HungWen</dc:creator>
