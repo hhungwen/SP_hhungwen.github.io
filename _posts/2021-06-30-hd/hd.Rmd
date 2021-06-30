@@ -1,0 +1,110 @@
+---
+title: "Residuals Leverage"
+author:
+  - name: Hui-Chia HungWen
+    url: https://hhungwen.github.io/SP_hhungwen.github.io/
+date: 06-30-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, message = FALSE, include = FALSE}
+
+library(dplyr)
+library(readr)
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(DT)
+library(car)
+library(broom)
+
+Data <- read_csv("Data/KeelungENG.csv")
+DataS <- read_csv("Data/DataS.csv")
+DataPS <- read_csv("Data/DataPS.csv")
+Presold <- read_csv("Data/Presold.csv")
+```
+
+*線性迴歸*，是概率統計學裏最重要的統計方法，也是機器學習中一類非常重要的算法。線性模型簡單理解非常容易，但是內涵是非常深奧的。尤其是線性迴歸模型中的Diagnostics plot的閱讀與理解一直被認爲是線性迴歸中的一個難點。  
+
+
+
+在任何線性模型中，能夠直接“lm”（模型有意義），既要考慮各個參數的t-test所得出的p-value，也要考慮總體模型F-檢驗得出的p-value。在這之後，還要清楚一個線性模型是建立在以下五個假設的基礎上的。如果不滿足以下五個假設，那麼模型即使通過了t-test和F-test，其預測效果也大打折扣。同時，也可以通過對這五個指標的研究，進一步優化模型（比如使用其他非參數統計方法，Box-Cox等變換方法，基於AIC,BIC，Adjusted-R^2,Cpd等方法的特徵選擇，Lasso，Ridge-regression，Elastic Net等等）。
+
+- Normal errors
+- Constant error variance
+- Absence of influential cases
+- Linear relationship between predictors and outcome variable
+- Collinearity  
+
+
+而針對這五個假設進行驗證，最直觀和簡單的方法就是用R語言自帶的模型診斷圖。
+
+
+```{r}
+plm4<- lm(Price_Meter ~ Note + Total_Floor + Rank_Market + 
+    Rank_Taipei  + Unit_Floor  + Total_Area + 
+    Unit_Room  + Land_Area  + Unit_Bath,   data = Data)
+
+summary(plm4)
+plot(plm4)
+
+```
+
+
+
+### 1. Residuals vs. Fitted  
+
+Resiuals即爲殘差的意思（估計值與真實值之差）。這就是殘差與真實值之間的關係畫圖。在理想線性模型中有五大假設。其中之一便是殘差應該是一個正態分佈，與估計值無關。如果殘差還和估計值有關，那就說明模型仍然有值得去改進的地方，當然，這樣的模型準確程度也就大打折扣。  
+
+### 2. Normal QQ-plot  
+
+Normal QQ-plot用來檢測其殘差是否是正態分佈的。左邊是一個殘差基本正態分佈的圖。右邊則是一個用Normal QQ-plot進行分析顯示出問題的圖。1和2其實用來乾的事情是差不多的。  
+
+注意一條：R語言可以顯示出偏差比較大的數據組。比如圖中的790,5190，5094等等。這些點從改進模型的角度可以把它刪除。但是有時候這些不正常的點或許暗含着一些特殊的規律。
+
+### 3. Scale-Location  
+
+這個圖是用來檢查等方差假設的。在一開始我們的五大假設第二條便是，我們假設預測的模型裏方差是一個定值。如果方差不是一個定值那麼這個模型的可靠性也是大打折扣的。  
+
+此圖是一個方差基本確定的情況。這種情況就是可以通過測試的。方差基本是一個常數。但如果發現方差是在不斷增長的那麼就需要進一步對模型進行分析。
+在實際操作中，還會出現類似“微笑曲線”或者“倒微笑曲線”的情況。也是無法通過方差恆定測試的。
+
+### 4. Residuals vs Leverage  
+
+Leverage就是槓桿的意思。這種圖的意義在於檢查數據分析項目中是否有特別極端的點。  
+在這裏我們引入了一個非常重要的指標：Cook距離。我們在線性模型裏用Cook距離分析一個點是否非常“influential。”一般來說距離大於0.5的點就需要引起注意了。在這裏我們借用了物理學電磁場理論中的等電勢理念。那個1，和0.5分別就是Cook距離爲1和0.5的等高線。  
+
+需注意，即使R將這些特殊的點標記了出來，也不等於他們一定需要被刪除。還是要參考Cook距離的絕對大小。  
+
+
+在第四張圖中可以看見最右邊有一個點離左邊的點們都非常遠.  我們必須找出此極端點並刪除他.  
+```{r}
+high_lev<-  plm4 %>%
+  augment() %>%
+  arrange(desc(.hat), .cooksd)
+
+high_lev
+```
+
+我們可以看見前幾個極端點,找出他後並刪除.  
+刪除之後再重新看看此模型的診斷圖, 可以看見極端點已不存在在診斷圖上.
+
+```{r}
+Data2 <- Data%>%
+  filter(Total_Area != 154.26)
+
+plm5<- lm(Price_Meter ~ Note + Total_Floor + Rank_Market + 
+    Rank_Taipei  + Unit_Floor  + Total_Area + 
+    Unit_Room  + Land_Area  + Unit_Bath,   data = Data2)
+
+plot(plm5)
+```
+
+
+
+
+
+
