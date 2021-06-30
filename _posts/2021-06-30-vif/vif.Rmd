@@ -1,0 +1,99 @@
+---
+title: "VIF"
+description: |
+  A short description of the post.
+author:
+  - name: Hui-Chia HungWen
+    url: https://hhungwen.github.io/SP_hhungwen.github.io/
+date: 06-30-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+```{r setup, message = FALSE, include = FALSE}
+
+library(dplyr)
+library(readr)
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(DT)
+library(car)
+
+Data <- read_csv("~/Desktop/SP_hhungwen/Data/KeelungENG.csv")
+DataS <- read_csv("~/Desktop/SP_hhungwen/Data/DataS.csv")
+DataPS <- read_csv("~/Desktop/SP_hhungwen/Data/DataPS.csv")
+Presold <- read_csv("~/Desktop/SP_hhungwen/Data/Presold.csv")
+```
+
+# 多重共線性 
+
+*VIF* (Variance Inflation Factor) 方差膨脹因子  
+
+為提升模型精准度及其穩定性,還需要進行許多操作.   方差膨脹因子便是非常經典的一步,原理很簡單,效果也淺顯易懂.  
+
+多重線性回歸模型中的主要假設之一就是我們的預測變量(自變量)彼此不相關. 我們希望預測變量與反應變量(因變量)相關,而不是彼此之間具有相關性.  
+
+# 公式解釋  
+
+*VIF* (Variance Inflation Factor) 方差膨脹因子 是指解釋變量之間存在多重共線性時的方差與不存在多重共線性時的方差之比.每個自變量都有一個膨脹因子VIF, 最後根據值的大小來選擇是否刪減.  
+
+以下為我原本建造出的房價預測模型：  
+
+
+```{r}
+plm<- lm(Price_Meter ~ Note + Total_Floor + Rank_Market + 
+    Rank_Taipei + Build_Type + Unit_Floor + Build_Date + Total_Area + 
+    Unit_Room + Build_Age + Land_Area + Rank_Train + Unit_Bath,   data = Data)
+summary(plm)
+```
+
+透過此我們可以看見每個自變量的VIF值：  
+```{r}
+
+vif(plm)
+```
+
+發現Note, Build_Type, Build_Date, Build_Age的方差膨脹因子都超過了10. 其實方差因子通常成對出現,通常較大的兩個方差膨脹因子表明這兩個變量自身本來就具有高度相關性,即這兩個變量一起才解釋一種東西,可以直接考慮赤鼯其中一個自己並不怎麼感興趣的變量即可. 這樣也可以回到我們最開始的目的：多重線性回歸的主要假設之一就是我們的預測變量彼此互相不相關, 我們希望預測的變量與反應變量相關,而不是自變量彼此之間具有相關性.  
+
+Build_Age, Build_Date, 和Note 的方差膨脹因子很明顯是相關的, Build_Age 是房屋交易時的屋齡, Build_Date是房屋建造的日期, 而Note則是依據房屋較易時的屋齡去分成四大類的區分,包括: 預售,新成屋（1~5), 6-15, 16-30 和 超過30年的屋齡. 豪不意外的這三個自變量有直接相關因此他們的VIF值都大於10. 
+
+在這一步驟,我選擇留下Note這個自變量 因為他在模型裡的重要性大於其他兩個自變量.  在留下Note刪除另外兩個自變量後的模型如下：  
+
+```{r}
+plm2<- lm(Price_Meter ~ Note + Total_Floor + Rank_Market + 
+    Rank_Taipei + Build_Type + Unit_Floor  + Total_Area + 
+    Unit_Room  + Land_Area + Rank_Train + Unit_Bath,   data = Data)
+vif(plm2)
+
+```
+
+我們可以看見,Note的VIF值從原本的71直直下降到了現在的4.72.  
+另一個超過10的自變量為Build_Type 建築物的類型. 與此相關的自變量包括Total_Floor.  接下來嘗試看看減去Total_Floor這個自變量之後是否有幫助Build_Type的VIF值.  
+```{r}
+plm3<- lm(Price_Meter ~ Note  + Rank_Market + 
+    Rank_Taipei + Build_Type + Unit_Floor  + Total_Area + 
+    Unit_Room  + Land_Area + Rank_Train + Unit_Bath,   data = Data)
+vif(plm3)
+
+```
+
+再減去Total_Floor這個自變量之後 VIF值確實有明顯下降,但依舊大於10.  
+因此我決定在模型中拿掉Build_Type,並保留Total_Floor.  
+
+```{r}
+plm4<- lm(Price_Meter ~ Note  + Rank_Market + Total_Floor+
+    Rank_Taipei + Unit_Floor  + Total_Area + Unit_Room  + Land_Area + Rank_Train + Unit_Bath,   data = Data)
+vif(plm4)
+
+```
+
+在留下Total_Floor並移除Build_Type這個自變量之後,所有自變量的VIF值都小於10了. 在這邊可以確保自變量彼此之間不具有相關性.
+
+在建立模型時若有發現存在明顯共線性,必須將其變量從模型中刪除並重建新的模型,排除共線性對回歸模型的影響.  
+
+```{r}
+summary(plm4)
+```
+
