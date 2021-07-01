@@ -2109,7 +2109,8 @@ document.addEventListener('DOMContentLoaded', function() {
 <h1 id="多重共線性">多重共線性</h1>
 <p><em>VIF</em> (Variance Inflation Factor) 方差膨脹因子</p>
 <p>為提升模型精准度及其穩定性,還需要進行許多操作. 方差膨脹因子便是非常經典的一步,原理很簡單,效果也淺顯易懂.</p>
-<p>多重線性回歸模型中的主要假設之一就是我們的預測變量(自變量)彼此不相關. 我們希望預測變量與反應變量(因變量)相關,而不是彼此之間具有相關性.</p>
+<p>多重線性回歸模型中的主要假設之一就是我們的預測變量(自變量)彼此不相關. 我們希望預測變量與反應變量(因變量)相關,而不是彼此之間具有相關性.<br />
+123</p>
 <h1 id="公式解釋">公式解釋</h1>
 <p><em>VIF</em> (Variance Inflation Factor) 方差膨脹因子 是指解釋變量之間存在多重共線性時的方差與不存在多重共線性時的方差之比.每個自變量都有一個膨脹因子VIF, 最後根據值的大小來選擇是否刪減.</p>
 <p>以下為我原本建造出的房價預測模型：</p>
@@ -2130,57 +2131,57 @@ lm(formula = Price_Meter ~ Note + Total_Floor + Rank_Market +
 
 Residuals:
      Min       1Q   Median       3Q      Max 
--11.0740  -2.1748  -0.4963   1.7601  18.0404 
+-10.8436  -2.1754  -0.4452   1.7680  18.2741 
 
 Coefficients:
                                       Estimate Std. Error t value
-(Intercept)                         -0.7239729  1.9084926  -0.379
-Note16~30                           -5.6396364  0.4513646 -12.495
-Note6~15                            -2.2249559  0.2134963 -10.422
-Noteover 30                         -3.7667889  0.7697323  -4.894
-NotePresold                         -0.4881275  0.1417516  -3.444
-Total_Floor                          0.4876469  0.0182581  26.709
-Rank_Market                          0.5822758  0.0277070  21.016
-Rank_Taipei                         -0.5177361  0.0279282 -18.538
-Build_TypeApartment under 11 floors  1.7546789  0.1650826  10.629
-Build_TypeHouse                      3.3936665  0.3522647   9.634
-Build_TypeStudio                     0.9641534  0.2366834   4.074
-Build_TypeWalk-Up Apartment          1.9863936  0.2686303   7.395
-Unit_Floor                           0.0886373  0.0129503   6.844
-Build_Date                           0.0007829  0.0001035   7.563
-Total_Area                          -0.0365216  0.0039151  -9.328
-Unit_Room                            0.4457776  0.0849972   5.245
-Build_Age                            0.2059145  0.0382346   5.386
-Land_Area                            0.0243723  0.0083193   2.930
-Rank_Train                          -0.0904387  0.0305399  -2.961
-Unit_Bath                            0.2249814  0.0987258   2.279
+(Intercept)                         -2.1451597  1.8901181  -1.135
+Note16~30                           -5.8523831  0.4479084 -13.066
+Note6~15                            -2.2802451  0.2115427 -10.779
+Noteover 30                         -3.9434872  0.7622516  -5.173
+NotePresold                         -0.4697865  0.1408147  -3.336
+Total_Floor                          0.4879613  0.0180599  27.019
+Rank_Market                          0.5638088  0.0274774  20.519
+Rank_Taipei                         -0.5201497  0.0276131 -18.837
+Build_TypeApartment under 11 floors  1.7668960  0.1642411  10.758
+Build_TypeHouse                      3.7775135  0.3617821  10.441
+Build_TypeStudio                     1.8213643  0.2390748   7.618
+Build_TypeWalk-Up Apartment          1.9470564  0.2672425   7.286
+Unit_Floor                           0.0822856  0.0128546   6.401
+Build_Date                           0.0008107  0.0001024   7.918
+Total_Area                          -0.0490088  0.0041997 -11.669
+Unit_Room                            0.9861381  0.0913193  10.799
+Build_Age                            0.2169888  0.0378657   5.730
+Land_Area                            0.0003286  0.0089072   0.037
+Rank_Train                          -0.1083952  0.0302091  -3.588
+Unit_Bath                            0.4011494  0.0999833   4.012
                                     Pr(&gt;|t|)    
-(Intercept)                         0.704446    
+(Intercept)                         0.256446    
 Note16~30                            &lt; 2e-16 ***
 Note6~15                             &lt; 2e-16 ***
-Noteover 30                         1.01e-06 ***
-NotePresold                         0.000578 ***
+Noteover 30                         2.37e-07 ***
+NotePresold                         0.000854 ***
 Total_Floor                          &lt; 2e-16 ***
 Rank_Market                          &lt; 2e-16 ***
 Rank_Taipei                          &lt; 2e-16 ***
 Build_TypeApartment under 11 floors  &lt; 2e-16 ***
 Build_TypeHouse                      &lt; 2e-16 ***
-Build_TypeStudio                    4.69e-05 ***
-Build_TypeWalk-Up Apartment         1.60e-13 ***
-Unit_Floor                          8.40e-12 ***
-Build_Date                          4.50e-14 ***
+Build_TypeStudio                    2.95e-14 ***
+Build_TypeWalk-Up Apartment         3.59e-13 ***
+Unit_Floor                          1.65e-10 ***
+Build_Date                          2.82e-15 ***
 Total_Area                           &lt; 2e-16 ***
-Unit_Room                           1.62e-07 ***
-Build_Age                           7.48e-08 ***
-Land_Area                           0.003406 ** 
-Rank_Train                          0.003075 ** 
-Unit_Bath                           0.022709 *  
+Unit_Room                            &lt; 2e-16 ***
+Build_Age                           1.05e-08 ***
+Land_Area                           0.970576    
+Rank_Train                          0.000336 ***
+Unit_Bath                           6.09e-05 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 3.355 on 6326 degrees of freedom
-Multiple R-squared:  0.5924,    Adjusted R-squared:  0.5911 
-F-statistic: 483.8 on 19 and 6326 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.293 on 6243 degrees of freedom
+Multiple R-squared:  0.6023,    Adjusted R-squared:  0.6011 
+F-statistic: 497.6 on 19 and 6243 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 透過此我們可以看見每個自變量的VIF值：<br />
 
@@ -2190,19 +2191,19 @@ F-statistic: 483.8 on 19 and 6326 DF,  p-value: &lt; 2.2e-16</code></pre>
 </code></pre>
 </div>
 <pre><code>                  GVIF Df GVIF^(1/(2*Df))
-Note         71.002573  4        1.703763
-Total_Floor   5.829748  1        2.414487
-Rank_Market   1.725688  1        1.313654
-Rank_Taipei   1.480018  1        1.216560
-Build_Type   41.378677  4        1.592565
-Unit_Floor    1.819876  1        1.349028
-Build_Date  129.886495  1       11.396776
-Total_Area    3.715349  1        1.927524
-Unit_Room     3.258568  1        1.805150
-Build_Age   134.720863  1       11.606932
-Land_Area     5.190685  1        2.278307
-Rank_Train    1.350474  1        1.162099
-Unit_Bath     3.433726  1        1.853032</code></pre>
+Note         72.817215  4        1.709146
+Total_Floor   5.809559  1        2.410303
+Rank_Market   1.748446  1        1.322288
+Rank_Taipei   1.482136  1        1.217430
+Build_Type   48.444999  4        1.624262
+Unit_Floor    1.804321  1        1.343250
+Build_Date  129.712869  1       11.389156
+Total_Area    4.197766  1        2.048845
+Unit_Room     3.467823  1        1.862209
+Build_Age   134.971639  1       11.617729
+Land_Area     5.850443  1        2.418769
+Rank_Train    1.359945  1        1.166167
+Unit_Bath     3.358384  1        1.832590</code></pre>
 </div>
 <p>發現Note, Build_Type, Build_Date, Build_Age的方差膨脹因子都超過了10. 其實方差因子通常成對出現,通常較大的兩個方差膨脹因子表明這兩個變量自身本來就具有高度相關性,即這兩個變量一起才解釋一種東西,可以直接考慮赤鼯其中一個自己並不怎麼感興趣的變量即可. 這樣也可以回到我們最開始的目的：多重線性回歸的主要假設之一就是我們的預測變量彼此互相不相關, 我們希望預測的變量與反應變量相關,而不是自變量彼此之間具有相關性.</p>
 <p>Build_Age, Build_Date, 和Note 的方差膨脹因子很明顯是相關的, Build_Age 是房屋交易時的屋齡, Build_Date是房屋建造的日期, 而Note則是依據房屋較易時的屋齡去分成四大類的區分,包括: 預售,新成屋（1~5), 6-15, 16-30 和 超過30年的屋齡. 豪不意外的這三個自變量有直接相關因此他們的VIF值都大於10.</p>
@@ -2216,17 +2217,17 @@ Unit_Bath     3.433726  1        1.853032</code></pre>
 </code></pre>
 </div>
 <pre><code>                 GVIF Df GVIF^(1/(2*Df))
-Note         4.721113  4        1.214103
-Total_Floor  5.734583  1        2.394699
-Rank_Market  1.715018  1        1.309587
-Rank_Taipei  1.464911  1        1.210335
-Build_Type  38.788782  4        1.579750
-Unit_Floor   1.818373  1        1.348470
-Total_Area   3.707488  1        1.925484
-Unit_Room    3.249267  1        1.802572
-Land_Area    5.153329  1        2.270094
-Rank_Train   1.349838  1        1.161825
-Unit_Bath    3.428332  1        1.851575</code></pre>
+Note         4.842595  4        1.217965
+Total_Floor  5.717075  1        2.391041
+Rank_Market  1.737161  1        1.318014
+Rank_Taipei  1.466630  1        1.211045
+Build_Type  45.873616  4        1.613227
+Unit_Floor   1.802841  1        1.342699
+Total_Area   4.187433  1        2.046322
+Unit_Room    3.457368  1        1.859400
+Land_Area    5.819361  1        2.412335
+Rank_Train   1.359501  1        1.165976
+Unit_Bath    3.354860  1        1.831628</code></pre>
 </div>
 我們可以看見,Note的VIF值從原本的71直直下降到了現在的4.72.<br />
 另一個超過10的自變量為Build_Type 建築物的類型. 與此相關的自變量包括Total_Floor. 接下來嘗試看看減去Total_Floor這個自變量之後是否有幫助Build_Type的VIF值.<br />
@@ -2240,16 +2241,16 @@ Unit_Bath    3.428332  1        1.851575</code></pre>
 </code></pre>
 </div>
 <pre><code>                 GVIF Df GVIF^(1/(2*Df))
-Note         4.512917  4        1.207278
-Rank_Market  1.712480  1        1.308618
-Rank_Taipei  1.464729  1        1.210260
-Build_Type  21.807220  4        1.470026
-Unit_Floor   1.479663  1        1.216414
-Total_Area   3.690281  1        1.921011
-Unit_Room    3.243851  1        1.801069
-Land_Area    4.976972  1        2.230913
-Rank_Train   1.285835  1        1.133947
-Unit_Bath    3.427981  1        1.851481</code></pre>
+Note         4.621677  4        1.210877
+Rank_Market  1.735294  1        1.317306
+Rank_Taipei  1.466506  1        1.210994
+Build_Type  26.418771  4        1.505702
+Unit_Floor   1.481138  1        1.217020
+Total_Area   4.165582  1        2.040976
+Unit_Room    3.453228  1        1.858286
+Land_Area    5.613084  1        2.369195
+Rank_Train   1.294234  1        1.137644
+Unit_Bath    3.354528  1        1.831537</code></pre>
 </div>
 <p>再減去Total_Floor這個自變量之後 VIF值確實有明顯下降,但依舊大於10.<br />
 因此我決定在模型中拿掉Build_Type,並保留Total_Floor.</p>
@@ -2261,16 +2262,16 @@ Unit_Bath    3.427981  1        1.851481</code></pre>
 </code></pre>
 </div>
 <pre><code>                GVIF Df GVIF^(1/(2*Df))
-Note        2.329786  4        1.111513
-Rank_Market 1.677888  1        1.295333
-Total_Floor 3.224007  1        1.795552
-Rank_Taipei 1.456311  1        1.206777
-Unit_Floor  1.805506  1        1.343691
-Total_Area  3.422334  1        1.849955
-Unit_Room   2.478470  1        1.574316
-Land_Area   2.983673  1        1.727331
-Rank_Train  1.306564  1        1.143050
-Unit_Bath   3.160665  1        1.777826</code></pre>
+Note        2.382078  4        1.114601
+Rank_Market 1.693952  1        1.301519
+Total_Floor 3.292483  1        1.814520
+Rank_Taipei 1.458956  1        1.207873
+Unit_Floor  1.792525  1        1.338852
+Total_Area  3.843534  1        1.960493
+Unit_Room   2.488970  1        1.577647
+Land_Area   3.078839  1        1.754662
+Rank_Train  1.316380  1        1.147336
+Unit_Bath   3.138948  1        1.771708</code></pre>
 </div>
 <p>在留下Total_Floor並移除Build_Type這個自變量之後,所有自變量的VIF值都小於10了. 在這邊可以確保自變量彼此之間不具有相關性.</p>
 <p>在建立模型時若有發現存在明顯共線性,必須將其變量從模型中刪除並重建新的模型,排除共線性對回歸模型的影響.</p>
@@ -2286,31 +2287,31 @@ lm(formula = Price_Meter ~ Note + Rank_Market + Total_Floor +
     Rank_Train + Unit_Bath, data = Data)
 
 Residuals:
-   Min     1Q Median     3Q    Max 
--9.977 -2.237 -0.399  1.758 18.965 
+    Min      1Q  Median      3Q     Max 
+-9.9323 -2.2155 -0.3505  1.7521 19.0091 
 
 Coefficients:
              Estimate Std. Error t value Pr(&gt;|t|)    
-(Intercept) 15.323908   0.275641  55.594  &lt; 2e-16 ***
-Note16~30   -7.249649   0.146464 -49.498  &lt; 2e-16 ***
-Note6~15    -2.709562   0.152623 -17.753  &lt; 2e-16 ***
-Noteover 30 -6.658083   0.194698 -34.197  &lt; 2e-16 ***
-NotePresold -0.632746   0.123745  -5.113 3.26e-07 ***
-Rank_Market  0.531877   0.027680  19.215  &lt; 2e-16 ***
-Total_Floor  0.353958   0.013756  25.730  &lt; 2e-16 ***
-Rank_Taipei -0.518763   0.028068 -18.482  &lt; 2e-16 ***
-Unit_Floor   0.099170   0.013069   7.588 3.71e-14 ***
-Total_Area  -0.045441   0.003807 -11.936  &lt; 2e-16 ***
-Unit_Room    0.458484   0.075103   6.105 1.09e-09 ***
-Land_Area    0.057491   0.006390   8.996  &lt; 2e-16 ***
-Rank_Train  -0.035932   0.030434  -1.181 0.237794    
-Unit_Bath    0.328414   0.095965   3.422 0.000625 ***
+(Intercept) 14.692932   0.278348  52.786  &lt; 2e-16 ***
+Note16~30   -7.270145   0.145541 -49.952  &lt; 2e-16 ***
+Note6~15    -2.661747   0.151268 -17.596  &lt; 2e-16 ***
+Noteover 30 -6.726398   0.194394 -34.602  &lt; 2e-16 ***
+NotePresold -0.616019   0.122847  -5.015 5.46e-07 ***
+Rank_Market  0.505982   0.027492  18.405  &lt; 2e-16 ***
+Total_Floor  0.363395   0.013820  26.295  &lt; 2e-16 ***
+Rank_Taipei -0.523389   0.027848 -18.794  &lt; 2e-16 ***
+Unit_Floor   0.094010   0.013024   7.218 5.89e-13 ***
+Total_Area  -0.060361   0.004085 -14.777  &lt; 2e-16 ***
+Unit_Room    0.812779   0.078641  10.335  &lt; 2e-16 ***
+Land_Area    0.048423   0.006568   7.372 1.89e-13 ***
+Rank_Train  -0.048311   0.030211  -1.599     0.11    
+Unit_Bath    0.573529   0.098256   5.837 5.58e-09 ***
 ---
 Signif. codes:  0 &#39;***&#39; 0.001 &#39;**&#39; 0.01 &#39;*&#39; 0.05 &#39;.&#39; 0.1 &#39; &#39; 1
 
-Residual standard error: 3.399 on 6332 degrees of freedom
-Multiple R-squared:  0.5812,    Adjusted R-squared:  0.5803 
-F-statistic: 675.9 on 13 and 6332 DF,  p-value: &lt; 2.2e-16</code></pre>
+Residual standard error: 3.347 on 6249 degrees of freedom
+Multiple R-squared:  0.5886,    Adjusted R-squared:  0.5878 
+F-statistic: 687.9 on 13 and 6249 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r distill-force-highlighting-css"><code class="sourceCode r"></code></pre></div>
 <!--radix_placeholder_article_footer-->
