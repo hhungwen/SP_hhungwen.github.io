@@ -51,7 +51,8 @@ plm<- lm(Price_Meter ~ Note + Total_Floor + Rank_Market +
 summary(plm)
 ```
 
-透過此我們可以看見每個自變量的VIF值：  
+透過此我們可以看見每個自變量的VIF值：  ...  
+
 ```{r}
 
 vif(plm)
