@@ -29,7 +29,7 @@ Presold <- read_csv("~/Desktop/SP_hhungwen/Data/Presold.csv")
 
 # 多重共線性 
 
-*VIF* (Variance Inflation Factor) 方差膨脹因子  
+*VIF* (Variance Inflation Factor) 方差膨脹因子  .
 
 為提升模型精准度及其穩定性,還需要進行許多操作.   方差膨脹因子便是非常經典的一步,原理很簡單,效果也淺顯易懂.  
 
