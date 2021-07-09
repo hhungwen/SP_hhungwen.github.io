@@ -1,5 +1,24 @@
 [
   {
+    "path": "posts/2021-07-09-senior-project/",
+    "title": "Senior Project - Keelung House Price Analysis ",
+    "description": {},
+    "author": [
+      {
+        "name": "Hui-Chia HungWen",
+        "url": "https://hhungwen.github.io/SP_hhungwen.github.io/"
+      }
+    ],
+    "date": "2021-07-09",
+    "categories": [],
+    "contents": "\ntitle: “Senior Project - Keelung House Price Analysis” description: |\nauthor: - name: Hui-Chia HungWen url: https://hhungwen.github.io/SP_hhungwen.github.io/ date: 07-09-2021 output: distill::distill_article: self_contained: false\nIntroduction\nTaipei City\nThe Capital City of Taiwan\nTaipei CityTaipei neighboring citiesKeelungData\nDepartment of Land Administration Open\n2017 ~ 2021 Keelung House Trades\nKeelung House Price 2017 - 2021\nWhy Increasing ?\nEconomic Growth\nLand Prices Increase\nMaterial Cost Increase\nWages Increase\n\n\n\nCounty in Keelung\n\nAnLe\n\n\nNuanNuan\n\nIndustrial residential mixed\n\n\nQiDu\n\n\nRenAi\n\nCenter of City\n\n\nXiYi\n\n\nZhongShan\n\n\nZhongZheng\n\n\n\n\n\n\n\n\n\n\nBuilding Type\nBuying a house is a major decision in your life, but when your budget is limited, would you choose buying a house or an apartment with elevator?\nBuilding Type\n\n\n\n\n\nHouse\nLimited Parking Space\nNo Community Management\nInconvenient For Elders\nWalk-up Apartment\nNo Parking Space\nNo Community Management\nInconvenient For Elders\nOld Building\n\n\nData%>% group_by(Build_Type)%>%\n  summarise(Mean = mean(Build_Age),\n            Max = max(Build_Age))\n\n\n# A tibble: 5 x 3\n  Build_Type                 Mean   Max\n  <chr>                     <dbl> <dbl>\n1 Apartment over 11 floors   2.98    36\n2 Apartment under 11 floors  4.17    38\n3 House                     14.0     57\n4 Studio                    15.4     46\n5 Walk-Up Apartment         32.0     49\n\nFinal Model\nBuilding Age Group\nTotal Floor of the Building\nUnit Floor in the Building\nLand Area\nTotal Living Area\nHow many Bathroom in the Unit\nHow many Room in the Unit\nDistance to Taipei\n\n\n\n\n\nCall:\nlm(formula = (Price_Meter) ~ Note + Total_Floor + Rank_Taipei + \n    Unit_Floor + Total_Area + Unit_Room + Land_Area + Unit_Bath, \n    data = Data2)\n\nResiduals:\n    Min      1Q  Median      3Q     Max \n-9.7596 -2.4458 -0.4199  1.9014 17.8649 \n\nCoefficients:\n             Estimate Std. Error t value Pr(>|t|)    \n(Intercept) 15.629844   0.259761  60.170  < 2e-16 ***\nNote16~30   -7.238829   0.149399 -48.453  < 2e-16 ***\nNote6~15    -2.209374   0.154451 -14.305  < 2e-16 ***\nNoteover 30 -6.602732   0.200567 -32.920  < 2e-16 ***\nNotePresold -1.039483   0.125211  -8.302  < 2e-16 ***\nTotal_Floor  0.350700   0.014079  24.910  < 2e-16 ***\nRank_Taipei -0.303273   0.024785 -12.236  < 2e-16 ***\nUnit_Floor   0.103482   0.013452   7.693 1.67e-14 ***\nTotal_Area  -0.068674   0.004120 -16.669  < 2e-16 ***\nUnit_Room    0.930136   0.080812  11.510  < 2e-16 ***\nLand_Area    0.051018   0.006594   7.737 1.18e-14 ***\nUnit_Bath    0.517168   0.100659   5.138 2.86e-07 ***\n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\nResidual standard error: 3.46 on 6247 degrees of freedom\nMultiple R-squared:  0.5605,    Adjusted R-squared:  0.5597 \nF-statistic: 724.1 on 11 and 6247 DF,  p-value: < 2.2e-16\n\n\n\n\n\n\n\n",
+    "preview": "posts/2021-07-09-senior-project/senior-project_files/figure-html5/unnamed-chunk-1-1.png",
+    "last_modified": "2021-07-09T21:45:05+08:00",
+    "input_file": "senior-project.utf8.md",
+    "preview_width": 1248,
+    "preview_height": 768
+  },
+  {
     "path": "posts/2021-06-30-hd/",
     "title": "Residuals Leverage",
     "description": {},

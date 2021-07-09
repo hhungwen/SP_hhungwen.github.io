@@ -1,0 +1,188 @@
+---
+title: "Senior Project - Keelung House Price Analysis "
+description: |
+  
+author:
+  - name: Hui-Chia HungWen
+    url: https://hhungwen.github.io/SP_hhungwen.github.io/
+date: 07-09-2021
+output:
+  distill::distill_article:
+    self_contained: false
+---
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(rmdformats)
+library(dplyr)
+library(readr)
+library(tidyverse)
+library(ggplot2)
+library(readxl)
+library(reshape2)
+library(GGally)
+library(vcd)
+library(grid)
+library(DT)
+library(broom)
+
+Data <- read_csv("~/Desktop/SP_hhungwen/Data/KeelungENG.csv")
+DataS <- read_csv("~/Desktop/SP_hhungwen/Data/DataS.csv")
+DataSS <- read_csv("~/Desktop/SP_hhungwen/Data/DataSS.csv")
+DataPS <- read_csv("~/Desktop/SP_hhungwen/Data/DataPS.csv")
+Presold <- read_csv("~/Desktop/SP_hhungwen/Data/Presold.csv")
+```
+# Introduction
+
+## Taipei City
+***The Capital City of Taiwan***
+
+
+![Taipei City](Data/taiwan4.png)
+
+
+
+![Taipei neighboring cities](Data/taiwan2.png)
+
+![Keelung](Data/taiwan3.jpg)
+
+***Data***  
+
+- Department of Land Administration Open 
+- 2017 ~ 2021 Keelung House Trades
+
+
+# Keelung House Price 2017 - 2021 
+
+***Why Increasing ?***
+
+- Economic Growth
+- Land Prices Increase
+- Material Cost Increase
+- Wages Increase
+
+
+```{r,echo=FALSE, warning=FALSE,message = FALSE}
+DataS%>%
+  ggplot(aes(x = Trade_Date, y=Price_Meter))+geom_point(color = 'red3', size = 0.2)+
+  geom_smooth(formula = y ~ x,method = "lm", color = 'blue3', size = 0.5, se=FALSE)+theme_bw()
+```
+
+
+
+
+# County in Keelung
+
+- <p style="color:pink">AnLe</p>
+- <p style="color:darkgoldenrod">NuanNuan</p> - Industrial residential mixed
+- <p style="color:darkgreen">QiDu</p>
+- <p style="color:green">RenAi</p> - Center of City
+- <p style="color:deepskyblue">XiYi</p> 
+- <p style="color:darkorchid">ZhongShan</p>
+- <p style="color:deeppink">ZhongZheng</p>
+
+```{r,echo=FALSE, warning=FALSE}
+
+ggplot(DataS, aes(x=as.factor(Trade_Year), fill=as.factor(County)))+geom_bar()+theme_bw()
+```
+
+
+
+```{r,echo=FALSE, warning=FALSE,message = FALSE}
+DataS%>%
+  ggplot(aes(x = Trade_Date, y=Price_Meter))+geom_point(color = 'red3', size = 0.2)+
+  geom_smooth(formula = y ~ x, method = "lm", color = 'blue', size = 0.5, se=FALSE)+facet_wrap(~County)+theme_bw()
+```
+
+
+```{r,echo=FALSE, warning=FALSE,message = FALSE}
+
+c2<- ggplot(DataS, aes(x = County, y = Price_Meter, fill = County))+geom_boxplot()+theme(axis.text.x = element_text(size = 5)) 
+
+c2 + ylab("Price per Meter Square (10k)")+theme_bw()+ theme(legend.position = "none")
+
+```
+
+
+
+# Building Type
+
+***Buying a house is a major decision in your life, but when your budget is limited, would you choose buying a house or an apartment with elevator?***
+
+![Building Type](Data/building.png)
+
+
+
+
+
+```{r,echo=FALSE, warning=FALSE,message = FALSE} 
+DataS%>%
+  ggplot(aes(x = Trade_Date, y=Price_Meter))+geom_point(color = 'red3', size = 0.2)+
+  geom_smooth(formula = y ~ x,method = "lm", color = 'blue3', size = 0.5, se=FALSE)+facet_wrap(~Build_Type)+theme_bw()
+```
+
+```{r,echo=FALSE, warning=FALSE,message = FALSE}
+
+b2<- ggplot(DataS, aes(x = Build_Type, y = Price_Meter, fill = Build_Type))+geom_boxplot()+theme(axis.text.x = element_text(size = 5)) 
+
+b2 +labs(x ="Building Type", y = "Price per Meter Square (10k)")+theme_bw()+coord_flip()+ theme(legend.position = "none")
+
+
+```
+
+## House
+
+- Limited Parking Space
+- No Community Management
+- Inconvenient For Elders
+
+## Walk-up Apartment 
+
+- No Parking Space
+- No Community Management
+- Inconvenient For Elders
+- Old Building
+
+```{r}
+Data%>% group_by(Build_Type)%>%
+  summarise(Mean = mean(Build_Age),
+            Max = max(Build_Age))
+```
+
+
+# Final Model
+
+
+- Building Age Group
+- Total Floor of the Building
+- Unit Floor in the Building
+- Land Area
+- Total Living Area
+- How many Bathroom in the Unit
+- How many Room in the Unit
+- Distance to Taipei
+
+
+```{r,echo=FALSE, warning=FALSE,message = FALSE}
+library(car)
+Data2 <- Data%>%
+  filter(Total_Area != 154.26) 
+
+Data2 = Data2[-c(791,2562,4887, 5021),]
+
+```
+```{r,echo=FALSE, warning=FALSE,message = FALSE}
+plm5<- lm((Price_Meter) ~ Note + Total_Floor + 
+    Rank_Taipei  + Unit_Floor  + Total_Area +
+    Unit_Room  + Land_Area  + Unit_Bath,   data = Data2)
+summary(plm5)
+```
+
+
+
+
+```{r,echo=FALSE, warning=FALSE,message = FALSE}
+library(hrbrthemes)
+library(plotly)
+```
