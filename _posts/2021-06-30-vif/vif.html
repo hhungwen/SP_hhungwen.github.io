@@ -1478,7 +1478,7 @@ code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
 
 <div class="d-article">
 <h1 id="多重共線性">多重共線性</h1>
-<p><em>VIF</em> (Variance Inflation Factor) 方差膨脹因子</p>
+<p><em>VIF</em> (Variance Inflation Factor) 方差膨脹因子 .</p>
 <p>為提升模型精准度及其穩定性,還需要進行許多操作. 方差膨脹因子便是非常經典的一步,原理很簡單,效果也淺顯易懂.</p>
 <p>多重線性回歸模型中的主要假設之一就是我們的預測變量(自變量)彼此不相關. 我們希望預測變量與反應變量(因變量)相關,而不是彼此之間具有相關性.<br />
 123</p>
@@ -1554,8 +1554,7 @@ Residual standard error: 3.293 on 6243 degrees of freedom
 Multiple R-squared:  0.6023,    Adjusted R-squared:  0.6011 
 F-statistic: 497.6 on 19 and 6243 DF,  p-value: &lt; 2.2e-16</code></pre>
 </div>
-透過此我們可以看見每個自變量的VIF值：<br />
-
+<p>透過此我們可以看見每個自變量的VIF值： …</p>
 <div class="layout-chunk" data-layout="l-body">
 <div class="sourceCode">
 <pre class="sourceCode r"><code class="sourceCode r"><span class='fu'><a href='https://rdrr.io/pkg/car/man/vif.html'>vif</a></span><span class='op'>(</span><span class='va'>plm</span><span class='op'>)</span>
